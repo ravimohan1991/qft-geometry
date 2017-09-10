@@ -22,6 +22,8 @@
 \usepackage[missing=]{gitinfo2}
 \usepackage{fancyhdr}
 \usepackage{slashed}
+\usepackage{soul}
+
 
 \definecolor{darkblue}{rgb}{0.1,0.1,0.7}
 \definecolor{darkred}{rgb}{0.5,0.1,0.1}
@@ -445,6 +447,16 @@ is a consequence of a stronger, ``categorified'' statement:
 \end{equation})
 \end{fact}
 
+Let $(X,g)$ be an oriented $n$-dimensional manifold $X$ endowed with the pseudo-Riemannian metric $g$.  The Hodge star operator is a unique linear function 
+\begin{equation}
+  \star:\Omega^k(X)\to\Omega^{n-k}(X)
+\end{equation}
+defined by the identity
+\begin{equation}
+  \alpha\wedge\star\beta=(\alpha|\beta)\text{vol}_{g}
+\end{equation}
+where $\alpha,\beta\in\large{\wedge}^kX$ and $\text{vol}_{g}\in\Omega^n(X)$.
+
 If $X$ is an oriented Riemannian $4n$-manifold then there is a small refinement of the
 middle Betti number $b_{2n}$:
 we have the ``Hodge star'' operator
@@ -477,7 +489,7 @@ Show that in this case the Betti number $b_{2n+1}(X)$ is even.
   \begin{equation}
     \cH_{2n+1}(X)=\cH_{2n+1}^{+i}(X) \oplus \cH_{2n+1}^{-i}(X)
   \end{equation}
-and the subspaces admit the complex structure.  The existence of complex structure gaurantee's the even dimensionality of harmonic spaces.
+and the subspaces admit the complex structure.  The existence of complex structure gaurantees the even dimensionality of harmonic spaces.
 
 If $X$ is not orientable, then existence of $\star$ operator, hence, complex structure is not guranteed.
 \end{solution}
@@ -489,8 +501,8 @@ Now we will replace the linear equation
 \eqref{eq:laplace} by a \ti{nonlinear} equation.
 
 Unlike linear equations --- which in some sense behave uniformly
-in the dimension --- nonlinear equations tend to behave very
-differently in different dimensions. With this in mind
+in the dimension --- \setulcolor{red}\ul{nonlinear equations tend to behave very
+differently in different dimensions}. With this in mind
 we now specialize to the case $\dim X = 4$.
 In this case, a new source of topological
 (or more precisely smooth) invariants was discovered
@@ -550,6 +562,13 @@ equation is \ti{nonlinear} in $A$, because of the quadratic part in \eqref{eq:cu
   $12$ functions $A^a_\mu$ ($\mu \in \{1,2,3,4\}$, $a \in \{1,2,3\}$).
 \end{itemize}
 \end{exercise}
+
+\begin{solution}
+  Let $x^\mu:X\to\R^4$ be the coordinate chart.  Then the connection $A=A_\mu(x) dx^\mu$ and the curvature $F=F_{\mu\nu}(x)dx^\mu\wedge dx^\nu$ where $\mu\in (0,\ldots,3)$
+  \begin{itemize}
+  \item When $G=U(1)$, then the curvature is $F = (\partial_\mu A_\nu-\partial_\nu A_\mu)dx^\mu\wedge dx^\nu$
+  \end{itemize}
+\end{solution}
 
 % From now on we specialize to the interesting case $G = SU(2)$.
 We consider the \ti{instanton moduli space}
