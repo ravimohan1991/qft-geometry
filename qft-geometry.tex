@@ -25,6 +25,7 @@
 
 \definecolor{darkblue}{rgb}{0.1,0.1,0.7}
 \definecolor{darkred}{rgb}{0.5,0.1,0.1}
+\definecolor{purple}{RGB}{128,0,128}
 \definecolor{darkgreen}{rgb}{0.0,0.42,0.06}
 \hypersetup{colorlinks=true,urlcolor=darkred,linkcolor=darkblue,citecolor=darkred}
 \definecolor{shadecolor}{rgb}{0.85,0.85,0.85}
@@ -136,6 +137,7 @@
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,notefont=\normalfont\bfseries, notebraces={(}{)}]{theorem}
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont,notefont=\normalfont\bfseries, notebraces={(}{)}]{noital}
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont\color{darkgreen},notefont=\normalfont\bfseries, notebraces={(}{)}]{green}
+\declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont\color{purple},notefont=\normalfont\bfseries, notebraces={(}{)}]{sbrown}
 \declaretheoremstyle[spaceabove=0.25cm,spacebelow=0.25cm,bodyfont=\normalfont,notefont=\normalfont\bfseries,qed=$\qedsymbol$,notebraces={(}{)}]{proofstyle}
 
 \declaretheorem[name=Theorem,numberwithin=section,style=theorem]{thm}
@@ -146,6 +148,7 @@
 \declaretheorem[name=Definition,sibling=thm,style=noital]{defn}
 \declaretheorem[name=Example,sibling=thm,style=noital]{example}
 \declaretheorem[name=Exercise,numberwithin=section,style=green]{exercise}
+\declaretheorem[name=Solution,numberwithin=section,style=sbrown]{solution}
 \declaretheorem[name=Proof,style=proofstyle,numbered=no]{pf}
 
 \numberwithin{equation}{section}
@@ -388,6 +391,31 @@ Betti numbers $b_k(X)$ for some of the following: $X = S^1, T^2, S^2$.
 are independent of which metric you choose, though the $\cH_k(X)$
 naively are not.)
 \end{exercise}
+\begin{solution}
+From \eqref{eq:form-laplacian} we have the definition of actual adjoint $d^*:\Omega^k(X)\to\Omega^{k-1}(X)$ as
+\begin{equation}
+  \langle d^*\alpha,\beta\rangle=\langle\alpha,d\beta\rangle
+\end{equation}
+which defines the Laplace operator $\Delta=dd^*+d^*d:\Omega^k(X)\to\Omega^k(X)$ on the Riemannian manifold $X$
+\begin{enumerate}
+\item First we note that the manifold $X=S^1$ can only have $\Omega^0(X)$ and $\Omega^1(X)$ (because higher forms vanish). Next, we put a flat metric $g_{00}=1$ on the circle $S^1$.  We consider $\alpha\in\Omega^1(X)$ and $\beta\in\Omega^0(X)$ then in the chart $\theta:S^1\to\mathbb{R}$, $\alpha = f(\theta)d\theta$ and $\beta=h(\theta)$.  Now $d^*$ can be evaluated as follows
+  \begin{equation}
+    \begin{split}
+       \langle d^*\alpha,\beta\rangle&=\langle\alpha,d\beta\rangle\\   
+       &=\int f(\theta)\partial_\theta h(\theta)\sqrt{g}d\theta\\
+       &=\int\frac{1}{\sqrt{g}}(-\partial_\theta)(\sqrt{g} f(\theta))h(\theta)\sqrt{g}d\theta
+    \end{split}
+  \end{equation}
+Now the Laplacian $\Delta=dd^*+d^*d$ acting on $\alpha\in\Omega^0(S^1)$ is essentially $d^*d\alpha$ (because $d^*$ annhiliates $\alpha$).  Therefore in the chart $\theta$, $\Delta=\partial^2_\theta$.  Now $\mathcal{H}_0(X)=\{\omega\in\Omega^0(X)|\partial^2_\theta\omega(\theta)=0\}$.  The solution $\omega(\theta)=a\theta+b$ resulting in $b_0(S^1)=2$ (?).
+
+Next, for $\alpha\in\Omega^1(S^1)$, the Laplacian operator $\Delta = dd^*$.  In the chart $\theta$, we have $\alpha = f(\theta)d\theta$ and $\Delta\alpha=\partial_\theta^2f(\theta)d\theta$.  Similar to last time, $f(\theta)$ is harmonic and $b_1(S^1)=1$
+\item Let $x,y:T^2\to\mathbb{R}^2$ be the chart for two-torous.  We put a flat metric $g_{ij}=\delta_{ij}$ where $i,j\in x,y$.  Repeating the procedure from the $S^1$ case, we have
+  \begin{equation}
+    d^*\equiv \frac{1}{\sqrt{g}}\partial_i(\sqrt{g}g^{ij}\partial_j)
+  \end{equation}
+Now for $T^2$ manifold, only the 
+\end{enumerate}
+\end{solution}
 
 \autoref{fact:betti-numbers-are-topological}
 is a consequence of a stronger, ``categorified'' statement:
