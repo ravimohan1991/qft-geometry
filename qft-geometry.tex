@@ -407,14 +407,26 @@ which defines the Laplace operator $\Delta=dd^*+d^*d:\Omega^k(X)\to\Omega^k(X)$ 
        &=\int\frac{1}{\sqrt{g}}(-\partial_\theta)(\sqrt{g} f(\theta))h(\theta)\sqrt{g}d\theta
     \end{split}
   \end{equation}
-Now the Laplacian $\Delta=dd^*+d^*d$ acting on $\alpha\in\Omega^0(S^1)$ is essentially $d^*d\alpha$ (because $d^*$ annhiliates $\alpha$).  Therefore in the chart $\theta$, $\Delta=\partial^2_\theta$.  Now $\mathcal{H}_0(X)=\{\omega\in\Omega^0(X)|\partial^2_\theta\omega(\theta)=0\}$.  The solution $\omega(\theta)=a\theta+b$ resulting in $b_0(S^1)=2$ (?).
+Now the Laplacian $\Delta=dd^*+d^*d$ acting on $\alpha\in\Omega^0(S^1)$ is essentially $d^*d\alpha$ (because $d^*$ annhiliates $\alpha$).  Therefore in the chart $\theta$, $\Delta=\partial^2_\theta$.  Now $\mathcal{H}_0(X)=\{\omega\in\Omega^0(X)|\partial^2_\theta\omega(\theta)=0\}$.  The solution $\omega(\theta)=a\theta+b$ resulting in $b_0(S^1)=1$ (?).
 
 Next, for $\alpha\in\Omega^1(S^1)$, the Laplacian operator $\Delta = dd^*$.  In the chart $\theta$, we have $\alpha = f(\theta)d\theta$ and $\Delta\alpha=\partial_\theta^2f(\theta)d\theta$.  Similar to last time, $f(\theta)$ is harmonic and $b_1(S^1)=1$
 \item Let $x,y:T^2\to\mathbb{R}^2$ be the chart for two-torous.  We put a flat metric $g_{ij}=\delta_{ij}$ where $i,j\in x,y$.  Repeating the procedure from the $S^1$ case, we have
   \begin{equation}
     d^*\equiv \frac{1}{\sqrt{g}}\partial_i(\sqrt{g}g^{ij}\partial_j)
   \end{equation}
-Now for $T^2$ manifold, only the 
+Now for $T^2$ manifold, only the forms in $\Omega^k(T^2)$ where $k\in (0,2)$ exist.  We compute the corresponding betti numbers 
+\begin{enumerate}
+\item for $\alpha\in\Omega^0(T^2)$, $\Delta\alpha=0$ implies $(\partial^2_x+\partial^2_y)\alpha(x,y)=0$.  Separation of variables gives the following solution $\alpha=C(x^2-y^2)$.  Thus $b_0(T^2)=2$
+\item for $\alpha\in\Omega^1(T^2)$, $\Delta\alpha=(dd^*+d^*d)\alpha=0$. Consider $\beta\in\Omega^0(T^2)$.  Now in the chart $(x,y)$, $\alpha = a(x,y)dx+b(x,y)dy$ and $\beta = \beta(x,y)$.  Let us compute the coordinate representation of $d^*$
+  \begin{equation}
+    \begin{split}
+      \langle d^*\alpha,\beta\rangle &= \langle\alpha,d\beta\rangle\\
+      &=\int dxdy(a(x,y)\partial_x\beta+b(x,y)\partial_y\beta)\\
+      &=-\int dxdy(\partial_xa(x,y)+\partial_yb(x,y))\beta 
+    \end{split}
+  \end{equation}
+Therefore in the chart $(x,y)$, $\Delta\alpha=0$ is $\partial_x^2a(x,y)+\partial_y^2b(x,y)=0$
+\end{enumerate}
 \end{enumerate}
 \end{solution}
 
@@ -424,7 +436,13 @@ is a consequence of a stronger, ``categorified'' statement:
 \begin{equation}
   \cH_k(X) \simeq H^k(X,\R)
 \end{equation}
-(where $H^k$ means de Rham or singular cohomology).
+(where $H^k$ means de Rham or singular cohomology which is defined as 
+\begin{equation}
+\begin{split}
+  H^k(X,\R) &= \frac{\text{closed $k$-forms on $X$}}{\text{exact $k$-forms on $X$}} \\
+            &= \frac{Ker(d:\Omega^k(X)\to\Omega^{k+1}(X))}{Im(d:\Omega^{k-1}(X)\to\Omega^k(X))}
+\end{split}
+\end{equation})
 \end{fact}
 
 If $X$ is an oriented Riemannian $4n$-manifold then there is a small refinement of the
@@ -453,6 +471,16 @@ we have $\star^2 = -1$.
 Show that in this case the Betti number $b_{2n+1}(X)$ is even.
 (Is this still true if $X$ is not orientable?)
 \end{exercise}
+
+\begin{solution}
+  Now $\star^2=-1$ which has the eigen values $\pm i$ implying that the space of harmonic forms has the following decomposition
+  \begin{equation}
+    \cH_{2n+1}(X)=\cH_{2n+1}^{+i}(X) \oplus \cH_{2n+1}^{-i}(X)
+  \end{equation}
+and the subspaces admit the complex structure.  The existence of complex structure gaurantee's the even dimensionality of harmonic spaces.
+
+If $X$ is not orientable, then existence of $\star$ operator, hence, complex structure is not guranteed.
+\end{solution}
 
 
 \subsection{Nonlinear equations}
