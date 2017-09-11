@@ -568,6 +568,7 @@ equation is \ti{nonlinear} in $A$, because of the quadratic part in \eqref{eq:cu
   \begin{itemize}
   \item When $G=U(1)$, then the curvature is $F = (\partial_\mu A_\nu-\partial_\nu A_\mu)dx^\mu\wedge dx^\nu$.  Now $\star F_{\alpha\beta}=\frac{1}{2}\epsilon^{\mu\nu}_{\alpha\beta}F_{\mu\nu}$ giving the result (for $F\in F^+$)
     \begin{equation}
+      \label{hodgedecompos}
       \begin{split}
         F_{12}^+&=F_{34}^+\\
         F_{13}^+&=F_{24}^+\\
@@ -575,7 +576,11 @@ equation is \ti{nonlinear} in $A$, because of the quadratic part in \eqref{eq:cu
       \end{split}
     \end{equation}
 Now the anti-self duality condition $F^+=0$ implies $F_{12}^+=F_{13}^+=F_{14}^+=0$ giving 3 linearly independent equations
-\item When $G=SU(2)$, $F_{\mu\nu}=(\partial_\mu A_{\nu}^a-\partial_{\nu}A_{\mu}^a)T_a+\frac{1}{2}f_{ab}^cT_cA^a_{\mu}A^b_{\nu}$ 
+\item When $G=SU(2)$, $F_{\mu\nu}=(\partial_\mu A_{\nu}^a-\partial_{\nu}A_{\mu}^a)T_a+\frac{1}{2}f_{bc}^aT_aA^b_{\mu}A^c_{\nu}$.   Now from the equation \ref{hodgedecompos} and the constraint $F^+=0$ we get
+  \begin{equation}
+    \partial_\mu A_\nu^a-\partial_\nu A_\mu^a+\frac{1}{2}f^a_{bc}A_\mu^b A_\nu^c=0\\
+  \end{equation}
+individually for each ``gauge index'' $a$ yielding $3\times 3=9$ coupled non-linear equations. 
   \end{itemize}
 \end{solution}
 
@@ -600,6 +605,25 @@ the exponential of a Lie algebra element, e.g. for $G = \U(1)$
 the formulas will be simplest if you write $g = \exp(\chi T)$ with $\chi$
 the generator of ${\mathfrak u}(1)$, and $\chi: U \to \R$ an ordinary function.)
 \end{exercise}
+
+\begin{solution}
+  \begin{enumerate}
+  \item when $G=U(1)$, we have the Lie algebra element $g=\exp(\chi T)$.  Therefore the gauge transformation is as follows (we assume the chart $x^\mu:X\to \R^4$)
+    \begin{equation}
+      \begin{split}
+        A_\mu(x) &\to g^{-1}A_\mu(x)g+g^{-1}\partial_{\mu}g\\
+        =& A_\mu + \exp(-\chi T)\times\chi\exp(\chi T)\partial_\mu T\\
+        =& A_\mu + \chi\partial_\mu T
+      \end{split}
+    \end{equation}
+  \item when $G=SU(2)$, the Lie algebra element is $g=\exp(\chi T^at_a)$ (here $t_a$ form the basis for Lie algebra $su(2)$) and the transformation is 
+    \begin{equation}
+      \begin{split}
+        A_\mu^a(x)&\to \exp(-\chi T^bt_b)A_\mu^a\exp(\chi T^bt_b)+\chi\partial_\mu T^bt_b
+      \end{split}
+    \end{equation}
+  \end{enumerate}
+\end{solution}
 
 \begin{exercise}
 Show that when $G = \U(1)$, the structure of $\cM$ depends on
