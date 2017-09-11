@@ -455,7 +455,7 @@ defined by the identity
 \begin{equation}
   \alpha\wedge\star\beta=(\alpha|\beta)\text{vol}_{g}
 \end{equation}
-where $\alpha,\beta\in\large{\wedge}^kX$ and $\text{vol}_{g}\in\Omega^n(X)$.
+where $\alpha,\beta\in\large{\wedge}^kX$ and $\text{vol}_{g}\in\Omega^n(X)$.  $(\alpha|\beta)=\alpha_\mu\beta^\mu$ is the induced inner product on $p$-forms.
 
 If $X$ is an oriented Riemannian $4n$-manifold then there is a small refinement of the
 middle Betti number $b_{2n}$:
@@ -566,7 +566,16 @@ equation is \ti{nonlinear} in $A$, because of the quadratic part in \eqref{eq:cu
 \begin{solution}
   Let $x^\mu:X\to\R^4$ be the coordinate chart.  Then the connection $A=A_\mu(x) dx^\mu$ and the curvature $F=F_{\mu\nu}(x)dx^\mu\wedge dx^\nu$ where $\mu\in (0,\ldots,3)$
   \begin{itemize}
-  \item When $G=U(1)$, then the curvature is $F = (\partial_\mu A_\nu-\partial_\nu A_\mu)dx^\mu\wedge dx^\nu$
+  \item When $G=U(1)$, then the curvature is $F = (\partial_\mu A_\nu-\partial_\nu A_\mu)dx^\mu\wedge dx^\nu$.  Now $\star F_{\alpha\beta}=\frac{1}{2}\epsilon^{\mu\nu}_{\alpha\beta}F_{\mu\nu}$ giving the result (for $F\in F^+$)
+    \begin{equation}
+      \begin{split}
+        F_{12}^+&=F_{34}^+\\
+        F_{13}^+&=F_{24}^+\\
+        F_{14}^+&=F_{23}^+
+      \end{split}
+    \end{equation}
+Now the anti-self duality condition $F^+=0$ implies $F_{12}^+=F_{13}^+=F_{14}^+=0$ giving 3 linearly independent equations
+\item When $G=SU(2)$, $F_{\mu\nu}=(\partial_\mu A_{\nu}^a-\partial_{\nu}A_{\mu}^a)T_a+\frac{1}{2}f_{ab}^cT_cA^a_{\mu}A^b_{\nu}$ 
   \end{itemize}
 \end{solution}
 
