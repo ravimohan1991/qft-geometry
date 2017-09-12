@@ -1094,6 +1094,7 @@ is also an asymptotic expansion as $t \to 0^+$.
 \end{enumerate}
 \end{exercise}
 
+
 In particular, since $Z(m,\lambda)$ has the divergent asymptotic 
 expansion \eqref{eq:0d-perturbation-series} it cannot also
 have a convergent one.
@@ -1111,6 +1112,42 @@ and this continuation has an essential singularity at $\lambda = 0$.
 a convergent Taylor expansion around $\lambda = 0$.
 \end{enumerate}
 \end{exercise}
+
+\begin{solution}
+  \begin{enumerate}
+  \item So the partition function is given by
+    \begin{equation}
+      \begin{split}
+      Z(m,\lambda) &= \int_{-\infty}^{\infty} dx e^{-\left(\frac{1}{2}mx^2+\frac{\lambda}{4!}x^4\right)}\\
+      &= \int_{-\infty}^{\infty} dx e^{-\frac{1}{2}mx^2}e^{-\left(1+\frac{2\lambda}{4!m^2}x^2\right)}\\
+      &= \left[e^{-\left(1+\frac{2\lambda}{4!}x^2\right)}\int_{-\infty}^{\infty} dx e^{-\frac{1}{2}mx^2}\right]_{-\infty}^{\infty}-\int_{-\infty}^{\infty} dx \frac{d}{dx}e^{-\left(1+\frac{2\lambda}{4!m^2}x^2\right)}\left(\int dx e^{-\frac{1}{2}mx^2}\right)\\
+      &= \left(0-\int_{-\infty}^{\infty} dx\sqrt{\frac{\pi}{2m}}\text{erf}\left(\frac{m}{2}x\right) \frac{d}{dx}e^{-\left(1+\frac{2\lambda}{4!m^2}x^2\right)}\right)\\
+      &= \frac{1}{\sqrt{m}}f(\tilde{\lambda})
+      \end{split}
+    \end{equation}
+    \item It is very easy to check the identity from the definition $Z(m,\lambda) = \int_{-\infty}^{\infty} dx e^{-\left(\frac{1}{2}mx^2+\frac{\lambda}{4!}x^4\right)}$
+    \item Well $Z(m,\lambda)=\frac{1}{\sqrt{m}}f(\tilde{\lambda})$ and from part 2, we have a differential equation.  On combining these two we get
+      \begin{equation}
+        \begin{split}
+          4\partial^2_mZ &= -24\partial_\lambda Z\\
+          4\partial^2_m\frac{1}{\sqrt{m}}f(\tilde{\lambda}) &= -24\partial_\lambda \frac{1}{\sqrt{m}}f(\tilde{\lambda})\\
+        \end{split}
+      \end{equation}
+but 
+\begin{equation}
+  \begin{split}
+    \tilde{\lambda} &= \frac{\lambda}{m^2}\\
+  \end{split}
+\end{equation}
+thus
+\begin{equation}
+        \begin{split}
+          3m^{-\frac{5}{2}}f(\tilde{\lambda}) &= -24m^{-2}\partial_{\tilde{\lambda}} \frac{1}{\sqrt{m}}f(\tilde{\lambda})\\
+f(\tilde{\lambda}) &= -8\partial_{\tilde{\lambda}}f(\tilde{\lambda})
+        \end{split}
+      \end{equation}
+  \end{enumerate}
+\end{solution}
 
 What we have seen here is that even in $0$-dimensional quantum field theory the perturbation series
 is ``only'' asymptotic. In higher-dimensional theories, we will meet very similar series, and there
