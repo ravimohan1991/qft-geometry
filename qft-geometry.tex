@@ -23,6 +23,8 @@
 \usepackage{fancyhdr}
 \usepackage{slashed}
 \usepackage{soul}
+\usepackage[makeroom]{cancel}
+
 
 
 \definecolor{darkblue}{rgb}{0.1,0.1,0.7}
@@ -1186,6 +1188,19 @@ Let $D_n$ be the set of all diagrams with $n$ vertices.
 \begin{exercise} Prove \autoref{prop:count-pairings}.
 \end{exercise}
 
+\begin{solution}
+  We apply the combinatorial scheme of choosing $2$ elements from $2k$ objects followed by choosing $2$ objects from $2k-2$ objects until we have only $2$ objects left.  Thus the number we are after, is 
+  \begin{equation}
+    \begin{split}
+    N &= \prod_{i=0}^{k-1} {2k-2i\choose 2}\\
+    &= \prod_{i=0}^{k-1} {\frac{(2(k-i))!}{(2(k-i-1))!2!}}\\
+    &= \frac{(2k)!}{\cancel{(2k-2)!}2!}\frac{\cancel{(2k-2)!}}{(2k-4)!2!}\ldots\frac{2!}{2!}\\
+    &= \frac{(2k)!}{2^k}
+    \end{split}
+  \end{equation}
+\color{red}{I have to still explain the $k!$ factor.}
+\end{solution}
+
 Thus we have
 \begin{equation}
   \abs{D_n} = \frac{(4n)!}{(2n)! 2^{2n}}.
@@ -1211,6 +1226,8 @@ which we could also rewrite as
 \begin{equation}
   Z(m, \lambda) \sim \sqrt\frac{2\pi}{m} \sum_{[\Gamma] \in \sqcup_n D_n / G_n} \frac{(-\lambda)^{\abs{\vertices(\Gamma)}}}{m^{\abs{\edges(\Gamma)}}} \frac{1}{\abs{\Aut \Gamma}}.
 \end{equation}
+For more information about orbit stablizer theorem, please refer the appendix 
+
 Thus we have proven a diagrammatic rule:
 
 \begin{prop}[Feynman diagram expansion for the partition function \eqref{eq:0d-partition-fn}] \label{prop:0d-feynman} To compute the perturbation
@@ -2150,7 +2167,15 @@ by
 \end{defn}
 \fixme{...}
 
-
+\subsection{Orbit-stablizer theorem}
+Let $G$ be a group acting on the finite set $X$. 
+\begin{defn}
+  The orbit Orb($x$) of an element $x\in X$ is defined as defined as 
+  \begin{equation}
+    \text{Orb}(x):={y\in X:g\in G:y=g*x}
+  \end{equation}
+where $*$ denotes the group action of $G$ on the set $X$
+\end{defn}
 
 \printbibliography
 
