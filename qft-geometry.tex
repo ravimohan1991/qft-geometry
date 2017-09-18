@@ -1542,6 +1542,21 @@ $V \to W$ is a pair of maps $V^0 \to W^0$ and $V^1 \to W^1$.
 An odd map $V \to W$ is a pair of maps $V^0 \to W^1$ and $V^1 \to W^0$.
 \end{defn}
 
+\begin{defn}[Category]
+A \emph{Category} $C$ consists of 
+\begin{enumerate}
+\item a class of Obj($C$) objects
+\item a class hom($C$) of morphisms between objects
+\item there is a composition of morphisms as follows\\
+hom($a,b$)$\times$ hom($b,c$) $\to$ hom($a,c$) 
+\end{enumerate}
+such that the following axioms hold
+ \begin{enumerate}
+ \item associativity
+ \item identity
+ \end{enumerate}
+\end{defn}
+
 \begin{defn}[Symmetric monoidal category of super vector spaces]
 The \ti{symmetric monoidal category} of super vector spaces 
 is the category of super vector spaces, with morphisms the even maps,
@@ -1628,8 +1643,8 @@ Expanding the exponential, the fact that $S^2 = 0$ means it \ti{truncates} to a 
   Z = \int_\cC \de \mu \, \left(1 - \half M \psi^1 \psi^2\right).
 \end{equation}
 What will we mean by such an integral?
-Integration over a purely odd vector space is defined to mean taking the
-``top order part'' of the function.
+\ul{Integration over a purely odd vector space is defined to mean taking the
+``top order part'' of the function.}
 More exactly: 
 
 \begin{defn} \label{defn:odd-integral} A \ti{translation invariant measure} $\de \mu$ 
@@ -1638,6 +1653,7 @@ is
 \begin{equation} \label{eq:measure-odd-vector-space}
   \de \mu \in \wedge^\rmtop(\Pi V^1).
 \end{equation}
+Here top represents the volume form in exterior algebra.
 For any $f \in \cO(V) \simeq \wedge^*((\Pi V^1)^*)$, let
 $f^\rmtop \in \wedge^\rmtop((\Pi V^1)^*)$ be the top component of $f$; then
 we define the integral by
@@ -1654,6 +1670,10 @@ Show that there exists a translation invariant measure $\de \mu$ on $V$ with the
 We call this measure $\de \psi$.
 \end{exercise}
 
+\begin{solution}
+  The measure $d\mu\in \wedge^1(\Pi V^1)$ where $V^1=\R^{0|1}$.  We consider the chart $x:\R^{0|1}\to\R$.  In that case, polynomials $f\in\cO(V) \simeq \wedge^1((\Pi V^1)^*)$, are represented by the form $dx$.  We can identify these forms with that of the elements of $\wedge^1(\Pi V^1)$ such that $d\mu:dx\to 1$.  Now the translation invariance $dx(d\mu+c)=dx(d\mu)$ implies $dx(c)=0$ where $c\in\R$.
+\end{solution}
+
 \begin{exercise} Again take $V = \R^{0 \vert 1}$, and $c \in \R$.
 Show that there exist translation invariant measures $c \de \psi$ and $\de (c \psi)$
 on $V$, obeying the formulas
@@ -1667,6 +1687,11 @@ Then prove the change of variables formula in one odd variable:
   \de (c \psi) = \frac{1}{c} \de \psi.
 \end{equation}
 \end{exercise}
+
+\begin{solution}
+  
+\end{solution}
+
 
 Similarly on $\R^{0 \vert q}$ we choose once and for all the 
 measure $\de \mu = \de \vec\psi$, characterized by
