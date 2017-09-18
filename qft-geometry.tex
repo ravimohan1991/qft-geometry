@@ -174,6 +174,7 @@
 \newcommand{\fr}{{\mathfrak r}}
 \newcommand{\fu}{{\mathfrak u}}
 \newcommand{\fG}{{\mathfrak G}}
+\newcommand{\fso}{{\mathfrak {so}}}
 
 \newcommand{\cC}{\ensuremath{\mathcal C}}
 \newcommand{\cG}{\ensuremath{\mathcal G}}
@@ -236,6 +237,7 @@
 \newcommand{\inst}{\mathrm{inst}}
 \newcommand{\eff}{\mathrm{eff}}
 \newcommand{\rmtop}{\mathrm{top}}
+\newcommand{\rmbot}{\mathrm{bot}}
 \newcommand{\dR}{\mathrm{dR}}
 \newcommand{\closed}{\mathrm{closed}}
 \newcommand{\exact}{\mathrm{exact}}
@@ -256,6 +258,7 @@
 \newcommand{\tb}[1]{\textbf{#1}}
 
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\dvol}{dvol}
 \DeclareMathOperator{\ad}{ad}
 \DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\re}{Re}
@@ -287,6 +290,9 @@
 \DeclareMathOperator{\Obs}{Obs}
 \DeclareMathOperator{\Ber}{Ber}
 \DeclareMathOperator{\Pf}{Pf}
+\DeclareMathOperator{\Euler}{Euler}
+\DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\Map}{Map}
 
 \newcommand{\insfig}[2]{
 
@@ -514,7 +520,8 @@ by Donaldson in the 1980s. For an excellent reference see \cite{MR1079726}.
 
 Fix a compact Lie group $G$ and let $P$ denote a principal $G$-bundle over $X$. Then
 we consider \ti{connections} in $P$.\footnote{For background on connections in principal
-bundles I like \cite{spivak}, \fixme{but there must also be a shorter reference}.}
+bundles I like \cite{spivak} or \cite{Kobayashi1996a}, or for a briefer and to-the-point 
+account \cite{Freed1992}.}
 A connection in $P$ may be locally represented by a $1$-form\footnote{By ``locally'' here I mean ``on a patch $U \subset X$ where we
 have chosen a trivialization of the bundle $P \vert_U$.''}
 \begin{equation}
@@ -1338,8 +1345,14 @@ Then consider the action
 \begin{equation} \label{eq:bosonic-quartic-action}
   S(x) = \half M(x,x) + \frac{1}{4!} C(x,x,x,x).
 \end{equation}
-$M$ determines a measure $\sqrt{\det M}$ on $V$. \fixme{explain how}
-When $C = 0$ the partition function is \fixme{check}
+$M$ determines a measure $\sqrt{\det M}$ on $V$:
+\begin{exercise}
+Verify that a bilinear form $M \in \Sym^2(V^*)$ determines a measure on $V$,
+which deserves to be called $\sqrt{\det M}$ in the sense that given
+a basis $\{e^1, \dots, e^n\}$ on $V$, with $M(e^i,e^j) = M^{ij}$, 
+$\sqrt{\det M} = \sqrt{\det (M^{ij})} \abs{e^*_1 \cdots e^*_n}$.
+\end{exercise}
+When $C = 0$ the partition function is
 \begin{equation}
   Z_0 = (2\pi)^{\half \dim V} \frac{\de\mu}{\sqrt{\det M}}.
 \end{equation}
@@ -1521,6 +1534,9 @@ We will replace the field space $\cC$, which so far has been a manifold
 (in fact a vector space), by a \ti{supermanifold} (in fact super vector
 space).
 
+Our treatment of supergeometry will be extremely superficial. Some references
+I have found useful are \cite{Deligne1999b,etingof,Witten2012,Zakharevich2017}.
+
 \begin{defn}[Super vector space] A \ti{super vector space} is a $\Z/2\Z$-graded vector space,
 \begin{equation}
   V = V^0 \oplus V^1.
@@ -1603,6 +1619,7 @@ will be an element
 \begin{equation}
 S \in \cO^0(V).
 \end{equation}
+
 
 \subsection{A fermionic theory}
 
@@ -1754,15 +1771,30 @@ develop a Feynman diagram expansion for these integrals.
 First let us see what happens when $C = 0$.
 Then the odd Gaussian integral gives the \ti{Pfaffian} of $M$,
 generalizing \eqref{eq:2d-odd-gaussian}
-\fixme{define it} (compare \eqref{eq:gaussian-det}):
+(compare \eqref{eq:gaussian-det}):
 \begin{equation} \label{eq:integral-pfaffian}
   Z_0 = \int_\cC \de \vec\psi \, \e^{-\half \psi^I M_{IJ} \psi^J} = \Pf (M).
 \end{equation}
+(Recall that the Pfaffian is a polynomial in the entries of $M$, defined
+only for skew-symmetric $M$, with the property that $(\Pf M)^2 = \det M$.
+For example, $\Pf \begin{pmatrix} 0 & a \\ -a & 0 \end{pmatrix} = a$. Note that
+for a general $2 \times 2$ matrix the determinant is \ti{not} the square of 
+any polynomial.)
+\begin{exercise} Prove \eqref{eq:integral-pfaffian}. One way that
+presumably works is to expand directly and compare with the
+combinatorial expression for the Pfaffian, namely if $\rank M = 2n$ then
+\begin{equation}
+  \Pf(M) = \frac{1}{2^n n!} \sum_{\sigma \in S_{2n}} (\sgn \sigma) \prod_{i=1}^n M_{\sigma(2i-1), \sigma(2i)}.
+\end{equation}
+\end{exercise}
+
 When $C \neq 0$ we compute $Z / Z_0$ by Feynman diagrams.
 The rules are just as they were in the even case, except that
-in the contribution from each labeling of the diagram, we have 
-to be careful about the overall sign. \fixme{explain sign rules in
-some comprehensible way}
+we have to be careful about signs.
+% We fix (arbitrarily) an ordering of the half-edges of the diagram.
+% Then, in the contribution from each labeling of the half-edges,
+\fixme{...}
+
 
 \begin{exercise} Suppose again $\cC = \R^{0 \vert 4}$ and $S = m \psi^1 \psi^2 + m \psi^3 \psi^4 + \lambda \psi^1 \psi^2 \psi^3 \psi^4$. Show that $Z = m^2 - \lambda$ by the Feynman diagram expansion. (There is only
 one nonempty diagram which contributes.)
@@ -1787,9 +1819,6 @@ To define measures we need
 the super analogue of the determinant line:
 \begin{defn}[Berezinian line]
 The \ti{Berezinian line} of a super vector space $V$ is
-% \footnote{This
-% is not the most functorial possible definition; it would be better to
-% look in \fixme{Deligne-Morgan}.}
 \begin{equation}
   \Ber V = \wedge^\rmtop V^0 \otimes \wedge^\rmtop (\Pi V^1)^*.
 \end{equation}
@@ -1830,6 +1859,7 @@ the pure bosonic theory with action $S_1(x)$.
 The answer has no particularly good property.
 
 There is a special case where we can do much better.
+(This example is more or less lifted from \cite{MR2003030}.)
 This is the case where for some $h: \R \to \R$, with $\abs{h(x)} \to \infty$ 
 as $\abs{x} \to \infty$, we have
 \begin{equation}
@@ -1917,7 +1947,10 @@ vector bundle with fiber $F$ over the super vector space $V$.''
 Then,
 
 \begin{defn}[Lie derivative of section of $\Ber V^*$ along super vector field] 
-If $X$ is a vector field on $V$, the \ti{Lie derivative}
+If $X$ is a vector field on $V$, the \ti{Lie derivative}\footnote{
+For a coordinate-free description of $\cL_X$, more in keeping with
+the notion of the infinitesimal variation along a flow which one has in ordinary
+geometry, see e.g. \cite{Zakharevich2017}.}
 \begin{equation}
   \cL_X: C^\infty(V, \Ber V^*) \to C^\infty(V, \Ber V^*)
 \end{equation}
@@ -1963,57 +1996,62 @@ using the compact support of $f$.
 This permits us to make the following fundamental construction:
 \begin{prop}[Invariance of partition function under $Q$-exact deformations] \label{prop:Z-deformation-invariance}
 Suppose $V$ is a super vector space with measure $\de \mu$.
-Suppose $Q$ is a divergence-free odd vector field on $V$,
-obeying $[Q,Q] = 0$ and $Q(S) = 0$.
-Finally let $\{\Psi_t\}_{t \in [0,1]}$ be a smoothly varying family 
-of odd elements in $C^\infty_c(V)$, with $\Psi_0 = 0$,
-and let $\{S_t\}$ be the corresponding family of deformed actions,
-\begin{equation} \label{eq:S-deformation}
-  S_t = S + Q \Psi_t.
+Let $\{S_t\}$ be a family of actions,
+invariant under a family of divergence-free odd symmetries $Q_t$,
+i.e. $Q_t S_t = 0$.
+Finally, suppose
+\begin{equation}
+  \partial_t S_t = Q_t \Psi_t
 \end{equation}
+with $\Psi_t \in C^\infty_c(\cC)$. 
+% , and
+% \begin{equation}
+%   \IP{ Q_t^2 \Psi_t } = 0
+% \end{equation}
+% when we compute the expectation value using the action $S_t$.
 Then the partition function $Z_t$ computed with action $S_t$
 is independent of $t$.
-
 \end{prop}
 
 \begin{pf}
 After this deformation the partition function is
 \begin{equation}
-  Z_t = \int_\cC \de \mu \, \e^{-(S + Q \Psi_t)}
+  Z_t = \int_\cC \de \mu \, \e^{-S_t}
 \end{equation}
-and in particular
+and thus
 \begin{align}
-  \partial_t Z_t &= \int_\cC \de \mu \, (Q \Psi'_t) \e^{-(S + Q \Psi_t)} \\
-  &= \int_\cC \de \mu \, Q \left( \Psi'_t \e^{-(S + Q \Psi_t)} \right) \\
-  &= 0
+  \partial_t Z_t &= -\int_\cC \de \mu \, (Q_t \Psi_t) \e^{-S_t} \\
+  &= -\int_\cC \de \mu \, Q_t \left( \Psi_t \e^{-S_t} \right) \\
+  &= 0.
 \end{align}
 At the first step, to justify the differentiation under the 
-integral sign, we use the fact that $\Psi_t$ is compactly supported;
-at the middle step we use $Q^2 = 0$.
+integral sign, we use the fact that $\Psi_t$ is compactly supported.
 \end{pf}
 
-\autoref{prop:Z-deformation-invariance} 
-is a sort of ideal version of the principle of 
-\ti{invariance under $Q$-exact deformations}, which has 
-strong consequences. Let us apply it in our example, taking
-\begin{equation}
-  Q = Q_1 + Q_2.
-\end{equation}
+One often considers the special case where 
+$Q_t = Q$ is independent of $t$ and 
+has $Q^2 = 0$, in which case it is natural to consider
+the \ti{homology} of $Q$ acting on $C^\infty(\cC)$;
+in particular $S$ is a $Q$-closed element, and \autoref{prop:Z-deformation-invariance}
+says roughly that $Z$ only depends on the \ti{homology class} of $S$.
 
-\begin{exercise}
-Verify that $[Q,Q] = 0$.
-\end{exercise}
-
-Now we consider varying the function $h(x)$ which appears in 
-\eqref{eq:r21-susy-action} to some family $h_t(x)$. 
+We will apply \autoref{prop:Z-deformation-invariance} in our example.
+We consider deforming the action $S$ in \eqref{eq:r21-susy-action} 
+to a family of actions $S_t$, by deforming $h(x)$
+to a family $h_t(x)$.
 Using dots for derivatives with respect to $t$, we have
 \begin{equation}
   \dot S = h(x) {\dot h}(x) + {\dot h}'(x) \psi^1 \psi^2. 
 \end{equation}
-But this is actually $Q$-exact: indeed
+But this is actually $Q_1$-exact: indeed
 \begin{equation} \label{eq:psi-example}
-  \dot S = Q \Psi, \qquad \Psi = {\dot h}(x) \psi^1.
+  \dot S = Q_1 \Psi, \qquad \Psi = {\dot h}(x) \psi^2.
 \end{equation}
+% We do not have $Q_1^2 \Psi = 0$, but the expectation value
+% does vanish:
+% \begin{exercise}
+% Show that $\IP{Q_1^2 \Psi} = 0$.
+% \end{exercise}
 Thus, applying \autoref{prop:Z-deformation-invariance},
 % in this situation, we would conclude that
 % $Z$ is completely independent of the function $h(x)$.
@@ -2038,20 +2076,24 @@ using an \ti{a priori} estimate of the contribution to $Z$ from
 the region $\abs{x} > L$, we can bootstrap to something slightly stronger:
 \begin{prop}[Strong deformation invariance of partition function] \label{prop:strong-invariance-0d}
 For the action \eqref{eq:r21-susy-action}, 
-$Z$ depends only on the degree of $h$ and the sign of its leading term.
+$Z$ depends only on the asymptotic signs $\eps_+$, $\eps_-$ of $h(x)$,
+defined by $\lim_{x \to \pm \infty} h(x) = \eps_{\pm} \infty$.
 \end{prop}
 
 \begin{exercise} Prove \autoref{prop:strong-invariance-0d}.
 \end{exercise}
 
 As we will see below, one cannot improve this further: $Z$ really
-\ti{does} depend on the degree of $h$ and the sign of its leading term.
-Crudely speaking, the point is that so long as the leading term of $h$
-is nonzero it kills the contributions from large $\abs{x}$, 
-making the field space $\cC$ effectively compact. As we vary $h$,
-if there is a moment when the leading term vanishes, the
-resulting loss of compactness causes a problem.
-This is a prototype for problems which recur over and over in 
+\ti{does} depend on the asymptotic signs $\eps_{\pm}$.
+Crudely speaking, the point is that so long as $h(x)^2 \to \infty$
+for large $\abs{x}$, it suppresses the contribution to $Z$ 
+from large $\abs{x}$, 
+making the field space $\cC$ effectively compact. If we try to change
+the sign $\eps_+$ (say) by interpolating through a family of functions 
+$h_t(x)$, there will be some critical $t$ where we lose this compactness,
+and so we lose the deformation invariance.
+This is a prototype for ``wall-crossing'' phenomena 
+which recur frequently in 
 topological QFT. In particular, the failure of Donaldson invariants on $X$
 to be fully independent of the metric 
 on $X$ when $b_2^+(X) = 1$ has a similar origin.
@@ -2073,8 +2115,9 @@ integral in one dimension:
 consider a family of actions $S_\lambda(x) = \lambda S(x)$,
 with all critical points nondegenerate.
 Then the $\lambda \to \infty$ asymptotics 
-are governed by the \ti{saddle point} expansion:
-\begin{prop}[Saddle point expansion in one dimension] \label{prop:saddle-expansion-1d-bosonic}
+are governed by the method of \ti{steepest descent}.
+See \cite{Bender1999} for a very clear account of this method.
+\begin{prop}[Steepest descent in one dimension] \label{prop:saddle-expansion-1d-bosonic}
 As $\lambda \to \infty$ we have
 \begin{equation}
   \int_{-\infty}^\infty \de x \, \e^{-\lambda S(x)} \sim \sum_{x_c: S'(x_c) = 0}
@@ -2089,9 +2132,10 @@ The proof goes by replacing the original integral by
   \sum_{x_c: S'(x_c) = 0} \int_{-\infty}^\infty \de x \, \e^{-\lambda (S(x_c) + \half S''(x_c) (x-x_c)^2)},
 \end{equation}
 a replacement which (maybe surprisingly) involves only an exponentially small error.
+
 Making the same kind of replacement in our supersymmetric theory leads to
 \begin{equation}
-  Z(\lambda) \sim \sum_{x_c: h(x_c) = 0} \int \de x \de \vec\psi \, \e^{- \half h'(x_c)^2 (x-x_c)^2 - h'(x_c) \psi^1 \psi^2}
+  Z(\lambda) \sim \sum_{x_c: h(x_c) = 0} \int \de x \de \vec\psi \, \e^{- \half \lambda h'(x_c)^2 (x-x_c)^2 - \lambda h'(x_c) \psi^1 \psi^2}
 \end{equation}
 and now performing the Gaussian integrals over fermions and bosons gives
 \begin{equation}
@@ -2105,10 +2149,10 @@ $Z(\lambda)$ is independent of $\lambda$, this proves:
 In our supersymmetric theory with action \eqref{eq:r21-susy-action},
 the partition function can be evaluated exactly:
 \begin{equation}
-  \frac{Z(\lambda)}{\sqrt{2\pi}} = \sum_{x_c: h(x_c) = 0} \sgn(h'(x_c)).
+  \frac{Z(\lambda)}{\sqrt{2\pi}} = \sum_{x_c: h(x_c) = 0} \sgn(h'(x_c)) = \half (\eps_+ - \eps_-).
 \end{equation}
 \end{prop}
-
+\insfig{qft-geometry-15}{0.8}
 This is such a toy example that we could have gotten this answer more directly:
 \begin{exercise}
 Prove \autoref{prop:toy-localization} directly by integrating
@@ -2125,18 +2169,21 @@ functions $f(x)$ are not
 $Q$-invariant.
 
 
-\subsection{A zero-dimensional sigma model}
+\subsection{Localization in a zero-dimensional sigma model}
 
+Now we consider a less trivial and more geometric example of supersymmetric
+localization.
 Suppose $(M, \omega)$ is a compact symplectic manifold with
 $\dim M = 2n$, with a $U(1)$ action
 generated by a Hamiltonian vector field
 \begin{equation}
   Y = \omega^{-1}(\de H).
 \end{equation}
-Suppose moreover that all fixed points of $Y$ are isolated points $x_c$.
+Suppose moreover that all fixed points of $Y$ are isolated.
+Fix some $\alpha \in \R$.
 Our interest is in the integral
-\begin{equation}
-  Z = \int_M \frac{\omega^n}{n!} \e^{\I \lambda H}. 
+\begin{equation} \label{eq:dh-integral}
+  \int_M \frac{\omega^n}{n!} \e^{\I \alpha H}. 
 \end{equation}
 \begin{example}
 The fundamental example is the case $M = S^2$ with $\omega$ the standard
@@ -2148,49 +2195,22 @@ by the function
 \end{equation}
 and thus
 \begin{align}
-  Z &= 2 \pi \int_0^\pi \e^{\I \lambda \cos \theta} \sin \theta \, \de \theta \\
-  &= -2 \pi \int_{1}^{-1} \e^{\I \lambda z} \de z \\
-  &= -2\pi \I \lambda^{-1} (\e^{\I \lambda} - \e^{-\I \lambda}) \\
-  &= 4 \pi \frac{\sin \lambda}{\lambda}.
+  \int_M \frac{\omega^n}{n!} \e^{\I \alpha H} &= 2 \pi \int_0^\pi \e^{\I \alpha \cos \theta} \sin \theta \, \de \theta \\
+  &= -2 \pi \int_{1}^{-1} \e^{\I \alpha z} \de z \\
+  &= \frac{2\pi}{\I \alpha} (\e^{\I \alpha} - \e^{-\I \alpha}) \\
+  &= 4 \pi \frac{\sin \alpha}{\alpha}.
 \end{align}
 \end{example}
-Note that this answer exhibits another localization
-phenomenon: it matches what one would get
-by making a quadratic approximation to the integrand 
-around the critical points $x_c$
-of $H$, replacing the contribution near the critical
-point by a Gaussian integral in the plane. Namely each
-critical point contributes
+This answer exhibits another localization
+phenomenon: it is a sum of contributions 
 \begin{equation} \label{eq:S2-critical-contrib}
-(\pm \I) \frac{2\pi}{\lambda \sqrt{\abs{\det H''(x_c)}}} \e^{\I \lambda H(x_c)}. 
+(\pm) \frac{2\pi}{\I \alpha} \e^{\I \alpha H(x_c)}
 \end{equation}
-One difference from the saddle-point expansions
-we discussed before is that we have the
-$\I$ in the exponent, hence no exponential suppression. 
-In the quadratic approximation
-one deals with this by rotating the contour of
-integration over each real variable by an angle $\pm \pi/4$
-into complex space, so that the integrand
-becomes exponentially suppressed again.
-This produces a factor \fixme{check sign}
-\begin{equation}
-  \e^{\frac{\pi \I}{4} (n_+ - n_-)}
-\end{equation}
-where $(n_+,n_-)$ is the signature of $H''$.
-In our example the signature is $(2,0)$ or $(0,2)$; this 
-accounts for the $\pm \I$ in \eqref{eq:S2-critical-contrib}.
-
-The same localization phenomenon occurs in general:
-\fixme{check factor $n!$}
-\begin{thm}[Duistermaat-Heckman localization formula]
-\begin{equation}
-\int_M \frac{\omega^n}{n!} \e^{\I \lambda H} = \left( \frac{2\pi}{\lambda} \right)^{n} \sum_{x_c} \e^{\frac{\pi \I}{4} (n_+(x_c) - n_-(x_c))} \frac{\e^{\I \lambda H(x_c)}}{\sqrt{\abs{\det H''(x_c) / \omega^n}}}
-\end{equation}
-\end{thm}
-
+from the two fixed points $x_c$ of 
+the $U(1)$ action. 
 
 % In short, this is another situation where the
-% $\lambda \to \infty$ asymptotic expansion of the integral is 
+% $\alpha \to \infty$ asymptotic expansion of the integral is 
 % unexpectedly also giving the exact answer.
 
 We would like to explain this localization as an instance
@@ -2200,30 +2220,34 @@ so far: we take our field space $\cC$ to be a \ti{supermanifold}
 \begin{equation}
  \cC = \Pi T M 
 \end{equation}
-i.e. the tangent bundle to $M$ where we reverse the parity of 
-the fibers.
+i.e. the total space of the tangent bundle to $M$,
+with the parity of the fibers reversed.
 Everything we have done for super vector spaces has
 a supermanifold version, obtained by appropriate patching.
-I will be vague about this (if I can get by.)
-\fixme{supermanifold refs: DM, Etingof, VZ...}
+I will be vague about this, again referring to the references
+\cite{Deligne1999b,etingof,Witten2012,Zakharevich2017} for a
+more detailed treatment.
 
 $\cC$ has local charts induced from the charts on $M$.
-In each such chart, we identify $\cC$ with $\R^{2n \vert 2n}$,
-with base coordinates $x^i$ (even)
+In each such chart, we identify $\cC$ with a patch of 
+$\R^{2n \vert 2n}$, with base coordinates $x^i$ (even)
 and fiber coordinates $\psi^i$ (odd). The latter generate an
 exterior algebra. Thinking of $\psi^i$ as $\de x^i$, this
-suggests
+suggests that globally we should have
 \begin{equation}
   C^\infty(\cC) = \Omega^*(M)
 \end{equation}
 and this is indeed true.
+(More generally, for any $\cC = \Pi E$ with $E \to M$ some vector
+bundle we would have $C^\infty(\cC) = C^\infty(M, \wedge^* E^*)$.)
+
 Now we take for our action the function
 \begin{equation}
-  S = H + \omega = H + \omega_{ij} \psi^i \psi^j.
+  S = -\I \alpha (H + \omega) = -\I \alpha (H + \omega_{ij} \psi^i \psi^j).
 \end{equation}
-The partition function is then
+The partition function is
 \begin{equation}
-  Z = \int_\cC \de \vec{x} \de \vec{\psi} \, \e^{-S}
+  Z = \int_\cC \de \vec{x} \de \vec{\psi} \, \e^{-S}.
 \end{equation}
 Here $\de \vec{x} \de \vec{\psi}$ denotes the canonical measure
 on $\cC$; this measure exists roughly because the
@@ -2242,10 +2266,8 @@ rule for integration is a straightforward generalization of what we
 have done before: namely we first integrate over the odd directions fiber
 by fiber, thus reducing to an integral over the base,
 \begin{equation} \label{eq:dh-integrated-over-fibers}
-  Z = \int_M \frac{\omega^n}{n!} \e^{-H}.
+  Z = (\I \alpha)^n \int_M \frac{\omega^n}{n!} \e^{\I \alpha H}.
 \end{equation}
-This is the quantity which appears in the Duistermaat-Heckman theorem,
-except that we have analytically continued to the value $\lambda = \I$.
 
 \begin{exercise} Verify \eqref{eq:dh-integrated-over-fibers}, by 
 computing in a local coordinate patch. (It might be easiest to use 
@@ -2259,42 +2281,338 @@ Begin by noting that the action $S$ is invariant under the odd vector field
 \end{equation}
 which has (Cartan's formula)
 \begin{equation}
-  [Q,Q] = \cL_Y = \psi^i \partial_{x^i} Y^j \partial_{\psi^j} + Y^i \partial_{x^i}.
+  \half [Q,Q] = \cL_Y = \psi^i \partial_{x^i} Y^j \partial_{\psi^j} + Y^i \partial_{x^i}.
 \end{equation}
 As before, we want to get a localization to some small subset of
 $\cC$ by making a perturbation $S \to S + Q \Psi$.
-For this we fix a $U(1)$-invariant metric $g$ on $M$ and then 
+For this we fix a $\U(1)$-invariant metric $g$ on $M$ and then 
 take the odd function
 \begin{equation}
-  \sigma = g(\psi, Y) = g_{ij} \psi^i Y^j = \psi^i Y_i
+  \Psi = g(\psi, Y) = g_{ij} \psi^i Y^j = \psi^i Y_i
 \end{equation}
 where in the last line we defined $Y_i = g_{ij} Y^j$.
 Then we have
 \begin{equation}
-  Q \sigma = \norm{Y}^2 + \psi^i \psi^k \partial_{x^k} Y_i
+  Q \Psi = g(Y,Y) + \de(gY) = Y^i Y_i - \psi^i \psi^k \partial_{x^k} Y_i
 \end{equation}
 and 
-\begin{equation}
-  Q^2 \sigma = 0
+\begin{equation} \label{eq:Qpsi-closed}
+  Q^2 \Psi = 0
 \end{equation}
-(using the fact that $g$ is $U(1)$-invariant).
-Now we replace $S \to S + \rho Q \sigma$.
-By the same arguments we used above
-to prove \autoref{prop:Z-deformation-invariance},
-$Z$ is independent of the parameter $\rho$.
-Taking $\rho$ very large, we expect an effective localization
-to a neighborhood of the zero locus of $\norm{Y}^2$ i.e. to the fixed locus
-of $Y$.
-Carrying out this localization gives the Duistermaat-Heckman formula
-\fixme{fill in some details here}.
+(using the fact that $g$ is $\U(1)$-invariant).
+\begin{exercise} Verify \eqref{eq:Qpsi-closed} by direct computation
+using the coordinate expressions of $Q$ and $\Psi$.
+\end{exercise}
+
+Now we make the deformation $S \to S + \lambda Q \Psi$.
+Because of \eqref{eq:Qpsi-closed}, the deformed action is 
+still $Q$-invariant, for all values of $\lambda$.
+Then, by \autoref{prop:Z-deformation-invariance},
+$Z$ is independent of the deformation parameter $\lambda$.
+Taking $\lambda$ very large, we can as usual 
+reduce to a neighborhood of the zero locus of $g(Y,Y)$, i.e. to the fixed locus of $Y$. Then the steepest-descent method gives
+\begin{equation} \label{eq:dh-steepest-descent}
+  Z \sim \sum_{x_c \in M: Y(x_c) = 0} \e^{\I \alpha H(x_c)} \times (2\pi)^n \frac{(\de(gY)(x_c))^n/n!}{\sqrt{\det (g(Y,Y))''(x_c)}}
+\end{equation}
+Here both the numerator
+$(\de(gY)(x_c))^n/n!$
+and the denominator
+$\sqrt{\det (g(Y,Y))''(x_c)}$ 
+are valued in $\wedge^\rmtop T^*_{x_c} M$.
+\fixme{it would be nicer to be careful about 
+twists by orientation bundle here; we always
+use the standard orientation to avoid having to worry about it}
+What remains is to compute their ratio.
+
+% show that their ratio is
+% equal to $(-1)^{n_-} \frac{\omega^n/n!}{\sqrt{\abs{\det H''(x_c)}}}$.
+One convenient way to do this is to consider a local model:
+$M = \R^2$ with its standard metric and symplectic form,
+\begin{equation}
+g = \de r^2 + r^2 \de \theta^2, \quad \omega = r \, \de r \wedge \de \theta, 
+\end{equation}
+with $U(1)$ acting in the charge-$k$ representation,
+generated by
+\begin{equation}
+  Y = k \partial_\theta, \qquad H = \half k r^2.
+\end{equation}
+Then we compute
+\begin{equation}
+  \de (gY) = 2 k r \, \de r \wedge \de \theta, \quad \sqrt{\det g(Y,Y)''(0)} = 2 k^2 r \, \de r \wedge \de \theta
+\end{equation}
+and thus the ratio comes to
+\begin{equation}
+  \frac{(\de(gY)(x_c))}{\sqrt{\det (g(Y,Y))''(x_c)}} = \frac{1}{k}.
+\end{equation}
+% while on the other hand
+% \begin{equation}
+%   \omega = r \de r \wedge \de \theta, \qquad \sqrt{\abs{\det H''(0)}} = \abs{k} r \, \de r \wedge \de \theta
+% \end{equation}
+% with ratio $1 / \abs{k}$,
+% so that the two ratios differ by $\sgn k$.
+
+For an isolated fixed point we can decompose the normal bundle
+into a direct sum of $n$ 2-dimensional pieces, with $U(1)$ 
+weights $k_1, \dots, k_n$, and put each piece in standard form as
+above.
+Thus \eqref{eq:dh-steepest-descent} becomes
+\begin{equation}
+  Z = (2\pi)^n  \sum_{x_c \in M: Y(x_c) = 0} \frac{\e^{\I \alpha H(x_c)}}{\prod_{i=1}^n k_i(x_c)}.
+\end{equation}
+
+% The number of negative weights $k_i$ is $\half n_-$.
+% Thus finally \eqref{eq:dh-steepest-descent} becomes
+% \begin{equation}
+%   Z = \sum_{x_c \in M: Y(x_c) = 0} \e^{\I \alpha H(x_c)} \times (2\pi)^n (-1)^{\half n_-} \frac{\e^{\I \alpha H(x_c)} \omega^n}{\sqrt{\abs{\det H''(x_c)}}}
+% \end{equation}
+Comparing this with \eqref{eq:dh-integrated-over-fibers} proves:
+
+\begin{thm}[Duistermaat-Heckman localization formula \cite{MR674406}] \label{thm:duistermaat-heckman}
+\begin{equation} \label{eq:dh-formula}
+\int_M \frac{\omega^n}{n!} \e^{\I \alpha H} = \left( \frac{2\pi}{\I \alpha} \right)^{n} \sum_{x_c} \frac{\e^{\I \alpha H(x_c)}}{\prod_{i=1}^n k_i(x_c)}
+\end{equation}
+where the $k_i(x_c) \in \Z$ are the weights of the $U(1)$ action
+on the normal bundle to $x_c$.
+\end{thm}
+
+In the case of $S^2$ which we considered above, the weights at the two fixed points
+were $k = +1$ and $k = -1$, the sign determined by whether the local orientation induced by the $U(1)$
+action agreed or disagreed with the orientation induced by $\omega$.
+
+\begin{exercise} \label{ex:dh-cp2} Work out the concrete 
+statement of \autoref{thm:duistermaat-heckman} in the case 
+where $M = \C\PP^2$,
+with $\omega$ the Fubini-Study \kahler form, 
+and the $U(1)$ action given in homogeneous coordinates 
+by $(z_1, z_2, z_3) \to (\e^{\I b_1 \theta} z_1, \e^{\I b_2 \theta} z_2, \e^{\I b_3 \theta} z_3)$ for $b_1, b_2, b_3 \in \Z$,
+with all $b_i$ distinct.
+\end{exercise}
+
+Incidentally,
+there is another way of thinking about 
+the localization formula \autoref{thm:duistermaat-heckman}. 
+The contributions from the fixed points match
+what one would get
+by making a quadratic approximation to the \ti{original} integrand 
+$\omega^n \e^{\I \alpha H}$
+around the critical points $x_c$
+of $H$. Such an approximation generally gives the leading $\alpha \to \infty$
+asymptotics of the integral (this is called the \ti{stationary phase} method,
+similar to the steepest descent method which we have been using).
+So, \autoref{thm:duistermaat-heckman} can be rephrased
+as the statement that, for this particular integral,
+ \ti{the stationary phase approximation is exact}.
+
+Since there are a few tricky points here, let us explain 
+in a bit more detail how one computes the local contributions 
+in the stationary phase method.
+A key difference between the stationary phase method and
+the steepest-descent expansion is that in the stationary phase 
+method we have the
+$\I$ in the exponent, hence no exponential suppression. 
+One deals with this by rotating the contour of
+integration over each real variable by an angle $\pm \pi/4$
+into complex space, so that the integrand
+becomes exponentially suppressed again.
+This produces a factor
+\begin{equation}
+  \e^{-\frac{\pi \I}{4} (n_+ - n_-)}
+\end{equation}
+where $(n_+,n_-)$ is the signature of 
+the bilinear form $H''(x_c)$.
+Then, making the quadratic approximation and performing the Gaussian integral 
+leads to the local contribution
+\begin{equation}
+  \e^{-\frac{\pi \I}{4} (n_+ - n_-)} \left( \frac{2 \pi}{\alpha} \right)^n
+\frac{\omega^n/n!}{\sqrt{\abs{\det H''(x_c)}}} \e^{\I \alpha H(x_c)}.
+\end{equation}
+Looking again at the local models one sees that this is
+\begin{equation}
+  \e^{-\frac{\pi \I}{4} (n_+ - n_-)} \left( \frac{2 \pi}{\alpha} \right)^n
+\frac{\e^{\I \alpha H(x_c)}}{\prod_{i=1}^n \abs{k_i(x_c)}}.
+\end{equation}
+and since $\half n_-$ is the number of $k_i(x_c)$ which are negative, this
+matches the contribution we found in \autoref{thm:duistermaat-heckman}.
+
+I do not really know the significance of the fact that 
+the stationary phase
+approximation to $\int \omega^n \e^{\I \alpha H}$ 
+is exact. As we have seen above, this is \ti{not}
+the same method one uses in the supersymmetric localization proof
+of \autoref{thm:duistermaat-heckman}, despite the obvious resemblance.
+
+% \begin{thm}[Duistermaat-Heckman localization formula, first version] \label{thm:duistermaat-heckman}
+% \begin{equation} \label{eq:dh-formula}
+% \int_M \frac{\omega^n}{n!} \e^{\I \alpha H} = \left( \frac{2\pi}{\alpha} \right)^{n} \sum_{x_c} \e^{-\frac{\pi \I}{4} (n_+(x_c) - n_-(x_c))} \frac{\e^{\I \alpha H(x_c)} \omega^n/n!}{\sqrt{\abs{\det H''(x_c)}}}
+% \end{equation}
+% \end{thm}
+
+\subsection{Some generalizations}
+
+The proof of \autoref{thm:duistermaat-heckman} which we have
+given naturally generalizes: we could have replaced the action $S$
+by any $Q$-invariant $S \in C^\infty(\cC)$.
+Under the identification $C^\infty(\cC) \simeq \Omega^*(M)$,
+such an $S$ would be called an \ti{equivariantly closed form}
+in the Cartan model for the $U(1)$-equivariant cohomology of $M$,
+where $Q$ becomes the \ti{equivariant differential} $\de + \cL_Y$.
+Then \autoref{thm:duistermaat-heckman} generalizes to
+
+\begin{thm}[Atiyah-Bott-Berline-Vergne localization for isolated 
+fixed points \cite{MR85e:58041,MR705039}] \label{thm:abbv-isolated}
+Suppose $M$ is a compact manifold with a $\U(1)$-action, with isolated
+fixed points.
+Also suppose $\beta \in \Omega^*(M)$ is an equivariantly closed form.
+Then
+\begin{equation}
+\int_M \e^{\beta} = \left( -2\pi \I \right)^{n} \sum_{x_c} \frac{\e^{\beta^\rmbot(x_c)}}{\prod_{i=1}^n k_i(x_c)}
+\end{equation}
+where $\beta^\rmbot$ means the bottom ($0$-form) component
+of $\beta$.
+\end{thm}
+
+\begin{exercise} Generalize the proof
+of \autoref{thm:duistermaat-heckman} to a proof of \autoref{thm:abbv-isolated}.
+\end{exercise}
+
+Finally we can consider a further generalization: let us imagine 
+trying to repeat the proof in the case where the fixed points
+are not isolated.
+In this situation, the leading term in the asymptotics
+produced by the steepest-descent method is an integral over the 
+fixed locus $F \subset M$.
+Thus the supersymmetric localization must reduce $\int_M \e^\beta$
+to an integral over $F$. The integrand turns out to be determined by the
+local structure around $F$, as follows.
+
+The normal bundle $NF$
+has an $\SO(2n)$-structure and connection 
+induced by our choice of metric $g$ on $M$,
+and a compatible $\U(1)$-action induced by the $\U(1)$-action 
+on $M$. \fixme{worry about orientations}
+
+\begin{defn}[Equivariant Euler form] Suppose $X$ is a manifold, with
+a $\U(1)$-equivariant $\SO(2n)$-bundle $E$, carrying a 
+$\U(1)$-equivariant connection. 
+The \ti{equivariant Euler form} of $E$ is \fixme{check signs}
+\begin{equation}
+  \Euler(E) = \Pf\left(\frac{1}{2\pi} \left(Y + F\right) \right) \in \Omega^*(X)
+\end{equation}
+where $Y \in \Omega^0(\fso(E))$ is the generator of the $\U(1)$ action
+and $F \in \Omega^2(\fso(E))$ is the curvature of the 
+equivariant connection on $E$.
+\end{defn}
+So $\Euler(E)$ is a form concentrated in even degrees.
+For example, in the case $n=1$, using the standard trivialization
+of $\fso(2)$, we have simply
+\begin{equation}
+  \Euler(E) = \frac{1}{2\pi} (\I k + F).
+\end{equation}
+More generally, the bottom component of $\Euler(E)$ is
+$\prod_{i=1}^n \frac{\I k_i}{2\pi}$ where the $k_i$ are the weights of the 
+$\U(1)$-action. In particular, if no $k_i = 0$ then $\Euler(E)$
+has nowhere-vanishing bottom component. This means $\Euler(E)$
+is invertible in $\Omega^*(X)$, i.e.
+there is a form
+\begin{equation}
+  \frac{1}{\Euler(E)} \in \Omega^*(X).
+\end{equation}
+
+\begin{exercise}
+Write the form $\frac{1}{\Euler(E)}$ explicitly in the case $n=1$.
+\end{exercise}
+
+% defined using the series expansion
+% \begin{equation}
+%   \frac{1}{c + x} = \frac{1}{c} (1 - c^{-1} x + c^{-2} x^2 + \cdots)
+% \end{equation}
+% which is finite when $x$ is nilpotent.
+We use this in the statement of the next theorem:
+
+\begin{thm}[Atiyah-Bott-Berline-Vergne localization in general \cite{MR85e:58041,MR705039}] \label{thm:abbv}
+Suppose $M$ is a compact manifold with a $\U(1)$-action, with fixed locus
+$F$.
+Also suppose $\beta \in \Omega^*(M)$ is an equivariantly closed form.
+Choose a $\U(1)$-invariant metric $g$ on $M$. Then
+\begin{equation}
+\int_M \e^{\beta} = \int_F \frac{\e^{\beta}}{\Euler(NF)}.
+\end{equation}
+\end{thm}
+
+\begin{exercise} Show that \autoref{thm:abbv} reduces to
+\autoref{thm:abbv-isolated} when the fixed points of the
+$\U(1)$-action are isolated.
+\end{exercise}
+
+\begin{exercise} Use \autoref{thm:abbv} to generalize
+\autoref{ex:dh-cp2} to the case
+where the $b_i$ need not be distinct.
+\end{exercise}
+
+\begin{exercise} Generalize the proof
+of \autoref{thm:abbv-isolated} to a proof of \autoref{thm:abbv}. \fixme{hard? at least needs more delicacy with the steepest descent expansion}
+\end{exercise}
 
 
-% For our next example we take $\cC$ to be a \ti{supermanifold}
-% rather than just a super vector space. 
-% Fortunately it will be a supermanifold of a rather simple kind,
-% and we will not develop the full theory of supermanifolds
-% formally, but try to get by with local computations.
+\section{QFT in \texorpdfstring{$1$}{1} dimension}
 
+Now we move to $1$-dimensional quantum field theory.
+So we will introduce a Riemannian $1$-manifold $(X,\eta)$ (``spacetime'').
+$X$ will be one of
+\begin{equation}
+  X = \R, \quad X = I, \quad X = S^1.
+\end{equation}
+We often parameterize $X$ by $t$ which we sometimes
+think of as the ``time.''
+
+Our configuration space $\cC_X$ will now be some kind of space
+of ``functions on $X$.''
+
+
+\subsection{The \texorpdfstring{$1$}{1}-dimensional sigma model}
+
+Fix the data:
+\begin{itemize}
+  \item A Riemannian manifold $(Y,g)$,
+  \item A function $V: Y \to R$ (``potential'').
+\end{itemize}
+
+We take our field space to be \fixme{be sharper about this}
+\begin{equation}
+  \cC_X = \Map(X,Y),
+\end{equation}
+and our action
+\begin{align}
+  S(\phi) &= \int_X \dvol_X \left(\half g(\dot\phi,\dot\phi) + V(\phi)\right) \\
+  &= \int_X \de t \sqrt{\eta_{tt}} \left(\half g_{ij}(\phi) \dot\phi^i \dot\phi^j \eta^{tt} + V(\phi)\right).
+\end{align}
+If we choose the parameter $t$ on $X$ to be the arc-length, then
+this reduces to
+\begin{equation}
+    S(\phi) = \int_X \de t \, \left( \half g_{ij}(\phi) \dot\phi^i \dot\phi^j + V(\phi) \right).
+\end{equation}
+This $1$-dimensional quantum field theory is equivalent to
+the usual model of nonrelativistic \ti{quantum mechanics},
+describing a single particle propagating on $Y$.
+Then we can think of the various $\phi \in \cC_X$ as various possible
+trajectories that the particle could take.
+
+Now \ti{formally} we would like to consider the partition function,
+\begin{equation}
+  Z_{S^1} = \int_{\cC_{S^1}} \de \phi \, \e^{-S}
+\end{equation}
+or the analogue on the interval $I = [0,T]$,
+\begin{equation} \label{eq:1d-Z-interval}
+  Z_{[0,T]}(y_0, y_1) = \int_{\cC_{[0,T]}(y_0,y_1)} \de \phi \, \e^{-S}
+\end{equation}
+where we defined
+\begin{equation}
+  \cC_{[0,T]}(y_0, y_1) = \{\phi: [0,T] \to Y \, \vert \, \phi(0) = y_0, \phi(T) = y_1\}.
+\end{equation}
+Thus we can view \eqref{eq:1d-Z-interval} 
+as a sum over all possible paths
+a particle can take from $y_0$ to $y_1$.
+\insfig{qft-geometry-16}{0.8}
 
 \appendix
 
@@ -2443,6 +2761,7 @@ by
 \end{defn}
 \fixme{...}
 
+<<<<<<< HEAD
 \subsection{Orbit-stablizer theorem}
 Let $G$ be a group acting on the finite set $X$. 
 \begin{defn}
@@ -2452,6 +2771,149 @@ Let $G$ be a group acting on the finite set $X$.
   \end{equation}
 where $*$ denotes the group action of $G$ on the set $X$
 \end{defn}
+=======
+
+\subsection{Symplectic manifolds}
+
+\begin{defn}[Nondegenerate skew pairing] \label{def:nondegenerate-skew-pairing}
+Suppose $V$ is a vector space over $\R$ or $\C$.
+We say $\omega \in \wedge^2(V)$ is \ti{nondegenerate}
+if the map
+\begin{align}
+  V &\to V^* \\
+  v &\mapsto \iota_v \omega = \omega(v,\cdot)
+\end{align}
+is an isomorphism.
+\end{defn}
+
+\begin{prop}[Standard basis for a nondegenerate skew pairing]
+\label{prop:standard-nondegenerate-skew-pairing}
+If $V$ is a finite-dimensional vector space over $\R$ or $\C$, and
+$\omega \in \wedge^2(V)$ is nondegenerate, then $V$ has
+dimension $2n$ for some $n$, and there
+exists a basis $\{e_1, \dots, e_n, f_1, \dots, f_n\}$ for $V$
+such that
+\begin{align}
+\omega(e_i, f_j) &= \delta_{ij}, \\
+\omega(e_i, e_j) &= 0, \\
+\omega(f_i, f_j) &= 0.
+\end{align}
+\end{prop}
+
+\begin{defn}[Symplectic manifold] \label{def:symplectic-manifold}
+A \ti{symplectic manifold} is a pair $(X,\omega)$
+where $X$ is a manifold and
+$\omega \in \Omega^2(X)$, such that
+\begin{equation}
+  \de \omega = 0
+\end{equation}
+and $\omega(x)$ is nondegenerate for every $x \in X$.
+\end{defn}
+
+\begin{defn}[Exact symplectic manifold]
+An \ti{exact symplectic manifold} is a tuple $(X,\omega,\lambda)$
+where $(X,\omega)$ is a symplectic manifold and $\lambda \in \Omega^1(X)$ has $\de \lambda = \omega$.
+\end{defn}
+
+\begin{example}[Cotangent bundle is an exact symplectic manifold]
+If $X$ is any manifold and $Y = T^* X$, then $Y$ carries a canonical
+$1$-form (``Liouville form''), $\lambda \in \Omega^1(Y)$,
+defined as follows:
+\begin{equation}
+  \lambda(x,p) \cdot v = p \cdot \pi_* v \qquad x \in X, p \in T^*_x X, v \in TY.
+\end{equation}
+Then there is a canonical symplectic form on $Y$ given by
+\begin{equation}
+\omega = \de \lambda.
+\end{equation}
+\end{example}
+
+\begin{exercise}
+Show that, in the canonical coordinate system $(p_i,q_i)$
+on $T^* X$ induced by a coordinate system $(q_i)$ on $X$,
+we have
+$\lambda = \sum_{i=1}^n p_i \de q_i$, and
+$\omega = \sum_{i=1}^n \de p_i \wedge \de q_i$.
+\end{exercise}
+
+
+\begin{defn}[Moment map] \label{def:moment-map}
+Suppose $X$ is a symplectic manifold, with symplectic form $\omega$,
+acted on by a real Lie group $G$. Let $\fg = \Lie G$ and let
+\begin{equation}
+\rho: \fg \to \Vect(X)
+\end{equation}
+be the infinitesimal action.
+Suppose given a function
+\begin{equation} \label{eq:moment-map}
+ \mu: X \to \fg^*
+\end{equation}
+and for $Z \in \fg$ write $\mu_Z = \mu \cdot Z$.
+We say $\mu$ is a \ti{moment map} for the $G$-action if
+for all $Z \in \fg$ we have
+\begin{equation} \label{eq:moment-map-condition-3}
+  \iota_{\rho(Z)} \omega = \de \mu_Z,
+\end{equation}
+and in addition the map \eqref{eq:moment-map} is $G$-equivariant
+(for the $G$-action on $X$ and the coadjoint $G$-action on $\fg^*$).
+\end{defn}
+In particular, the moment map $\mu$
+\ti{determines} the $G$-action.
+
+Note that moment maps do not always exist.
+At the very least, the existence of a moment
+map requires that $\iota_{\rho(Z)} \omega$ is closed
+for all $Z \in \fg$, by \eqref{eq:moment-map-condition-3}. Using
+Cartan's ``magic formula''
+\begin{equation} \label{eq:cartan-magic-formula}
+  \cL_v \omega = \de (\iota_v \omega) + \iota_v (\de \omega)
+\end{equation}
+and the fact that $\de \omega = 0$,
+this is equivalent to requiring $\cL_{\rho(Z)}\omega = 0$,
+i.e. the $G$-action preserves $\omega$ infinitesimally.
+But even if the $G$-action preserves $\omega$,
+a moment map still may not exist.\footnote{When $G$ is compact,
+moment maps exist at least
+\ti{locally} on $X$, though maybe not globally. When $G$ is not
+compact there can even be a local obstruction.}
+
+Conversely, if a moment map $\mu$ does exist and $\fg$
+has nontrivial center, we can get another moment map by taking
+$\mu' = \mu + c$, where $c$ is fixed by the \ti{coadjoint}
+action of $G$, i.e. $c \in [\fg,\fg]^\perp \subset \fg^*$.
+
+\begin{exercise}
+Suppose $X = \R^2$ with $\omega = \de x_1 \wedge \de x_2$, and
+$G = SO(2) = U(1) = \{e^{\I \alpha}: \alpha \in \R \}$.
+Then $\fu(1)$ is $1$-dimensional, spanned by $\partial_\alpha$.
+Show that the counterclockwise rotation action of $U(1)$ on $X$,
+given by the matrices
+\begin{equation}
+   \begin{pmatrix} \cos \alpha & - \sin \alpha \\ \sin \alpha & \cos \alpha \end{pmatrix},
+ \end{equation}
+has a moment map $\mu: \R^2 \to \fu(1)^*$, given by
+\begin{equation}
+  \mu(x_1,x_2) \cdot \partial_\alpha = -\half (x_1^2 + x_2^2).
+\end{equation}
+\end{exercise}
+Thus if we identify $\fu(1) \simeq \R$ using the generator
+$\partial_\alpha$, we can think of $\mu$ just as an $\R$-valued function
+on $X$,
+\begin{equation}
+  \mu(x_1,x_2) = -\half (x_1^2 + x_2^2).
+\end{equation}
+
+\begin{exercise} \label{exc:cotangent-moment-map}
+Suppose $X$ is any manifold, with a compact
+group $G$ acting. Then $T^* X$ is a symplectic manifold
+which also has a canonical action of $G$. Verify that
+\begin{equation}
+  \mu_Z(x,p) = -p \cdot (\rho(Z)(x)) \qquad x \in X, p \in T^*_x X
+\end{equation}
+gives a moment map for this action.
+\end{exercise}
+
+>>>>>>> upstream/master
 
 \printbibliography
 
