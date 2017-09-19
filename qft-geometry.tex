@@ -1771,6 +1771,17 @@ Suppose $\cC = \R^{0 \vert 4}$
 and $S = m \psi^1 \psi^2 + m \psi^3 \psi^4 + \lambda \psi^1 \psi^2 \psi^3 \psi^4$. Show that $Z = m^2 - \lambda$.
 \end{exercise}
 
+\begin{solution}
+  The measure $d\mu=d\psi^1d\psi^2d\psi^3d\psi^4\in\wedge^4(\Pi\R^{0|4})$ leads to the following integral
+  \begin{equation}
+  \begin{split}
+    Z&=\int_{\mathcal{C}}d\psi^1d\psi^2d\psi^3d\psi^4 e^{-(m\psi^1\psi^2+m\psi^3\psi^4+\lambda\psi^1\psi^2\psi^3\psi^4)}\\
+     &=\int_{\mathcal{C}}d\psi^1d\psi^2d\psi^3d\psi^4 (1-(m\psi^1\psi^2+m\psi^3\psi^4+\lambda\psi^1\psi^2\psi^3\psi^4)+\frac{1}{2}(m\psi^1\psi^2+m\psi^3\psi^4+\lambda\psi^1\psi^2\psi^3\psi^4)^2)
+  \end{split}
+  \end{equation}
+Now $\int_{\cC}d\psi^1d\psi^2d\psi^3d\psi^4\psi^1\psi^2=\alpha(a1,a2,1,1)=0$ where $\alpha\in\wedge^4(\Pi\R^{0|4})$.  Thus the only surviving terms are $m^2\psi^2\psi^2\psi^3\psi^4$ and $-\lambda\psi^2\psi^2\psi^3\psi^4$.  Thus $Z=m^2-\lambda$
+\end{solution}
+
 
 \subsection{Perturbation theory}
 
