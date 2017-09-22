@@ -1813,6 +1813,7 @@ combinatorial expression for the Pfaffian, namely if $\rank M = 2n$ then
 \end{equation}
 \end{exercise}
 
+
 When $C \neq 0$ we compute $Z / Z_0$ by Feynman diagrams.
 The rules are just as they were in the even case, except that
 we have to be careful about signs.
@@ -1904,6 +1905,7 @@ If $\cA$ is a commutative superalgebra, then a map $D: \cA \to \cA$
 (either even or odd)
 is a \ti{derivation} of $\cA$ if it obeys
 \begin{equation}
+\label{gradedderiv}
   D(aa') = (Da)a' + (-1)^{\abs{a} \abs{D}} a(Da').
 \end{equation}
 \end{defn}
@@ -1939,8 +1941,12 @@ and
 \end{defn}
 
 \begin{exercise} Verify that $\Vect(V)$ is 
-a super Lie algebra under supercommutator: $[X,Y] f = X(Yf) - (-1)^{\abs{X} \abs{Y}} Y(Xf)$.
+a super Lie algebra under supercommutator: $[X,Y] f = X(Yf) - (-1)^{\abs{X}\abs{Y}} Y(Xf)$.
 \end{exercise}
+
+\begin{solution}
+  The super-vector space $V$ has a space $Vec(V)$ of graded derivations on $C^\infty(V)$ given by equation \ref{gradedderiv}.  
+\end{solution}
 
 Now in our example of $\R^{1 \vert 2}$ we consider the
 odd vector fields
