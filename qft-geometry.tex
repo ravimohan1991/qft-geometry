@@ -278,6 +278,7 @@
 \DeclareMathOperator{\ind}{ind}
 \DeclareMathOperator{\coker}{coker}
 \DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\Ric}{Ric}
 \DeclareMathOperator{\Hol}{Hol}
 \DeclareMathOperator{\gr}{gr}
 \DeclareMathOperator{\Pin}{Pin}
@@ -2641,17 +2642,16 @@ define
 \end{equation}
 
 The action is, for differentiable $\phi$,
-\fixme{maybe should have $\frac14$ on kinetic term?}
 \begin{align}
-  S(\phi) &= \int_X \dvol_X \left(\half g(\dot\phi,\dot\phi) + V(\phi) - \frac13 R(\phi) \right) \\
-  &= \int_X \de t \sqrt{\eta_{tt}} \left(\half g_{ij}(\phi) \dot\phi^i \dot\phi^j \eta^{tt} + V(\phi) - \frac13 R(\phi)\right)
+  S(\phi) &= \int_X \dvol_X \left(\qtr g(\dot\phi,\dot\phi) + V(\phi) - \frac13 R(\phi) \right) \\
+  &= \int_X \de t \sqrt{\eta_{tt}} \left(\qtr g_{ij}(\phi) \dot\phi^i \dot\phi^j \eta^{tt} + V(\phi) - \frac13 R(\phi)\right)
 \end{align}
 where $R: Y \to \R$ is the scalar curvature.
 
 If we choose the parameter $t$ on $X$ to be the arc-length, then
 the action reduces to
 \begin{equation}
-    S(\phi) = \int_X \de t \, \left( \half g_{ij}(\phi) \dot\phi^i \dot\phi^j + V(\phi) - \frac13 R(\phi) \right).
+    S(\phi) = \int_X \de t \, \left( \qtr g_{ij}(\phi) \dot\phi^i \dot\phi^j + V(\phi) - \frac13 R(\phi) \right).
 \end{equation}
 We can think of various $\phi \in \cC_X$ as various possible
 trajectories that the particle could take on $Y$.
@@ -2708,7 +2708,8 @@ paths, with each segment the unique minimizing geodesic between its endpoints.
 \insfig{qft-geometry-17}{0.8}
 $\cC_{X;N}$ is an open dense subset\footnote{The restriction to an open dense
 subset is a technicality, brought on by the fact that some pairs of points are
-connected by more than one geodesic.} in $Y^{N+1}$.
+connected by more than one length-minimizing 
+geodesic.} in $Y^{N+1}$.
 Restricting $S$ to these paths gives $S: \cC_{X;N} \to \R$.
 $\cC_{X;N}$ also has a natural measure induced from the volume
 measure on $Y$, up to a tricky constant:
@@ -2732,11 +2733,9 @@ long time when $Y = \R^n$, but is apparently much more recent
 for more general 
 $Y$, e.g. see \cite{MR1698956,Baer2007} for the 
 case of $Y$ compact.
+To describe what the limit is, we need a digression on the heat kernel:
 
-When $X$ is an interval
-it turns out that the limit is the
-\ti{heat kernel}:
-\begin{prop}[Heat kernel]
+\begin{prop}[Heat kernel] \fixme{what class of $Y$, $V$?}
 For any $t \in \R_+$, the \ti{heat kernel} (deformed by $V$) 
 is a smooth function $k_t$ on $Y \times Y$, obeying the heat
 equation in the first variable,\footnote{Our
@@ -2772,18 +2771,21 @@ distributions to $C^\infty$ functions. In particular
 it gives a linear operator on $L^2(M)$,
 sometimes written $U_t = \e^{-t (-\Delta + V)}$.
 
+Now we can state the main fact about the $1$-dimensional sigma model:
+its path integral actually exists and the result is the heat kernel!
+
 \begin{prop}[Lattice approximations to $1$-dimensional sigma model
 converge to the heat kernel] \label{prop:sigma-heat}
 If $X = [0,T]_{y_0}^{y_1}$,
-then
+then the discretized path integrals converge, so we can define
 \begin{equation}
-\lim_{N \to \infty} Z_N = k_T(y_0,y_1).
+Z_{[0,T]_{y_0}^{y_1}} = \lim_{N \to \infty} Z_N.
+\end{equation}
+Moreover,
+\begin{equation}
+Z_{[0,T]_{y_0}^{y_1}} = k_T(y_0,y_1).
 \end{equation}
 \end{prop}
-
-This says, in short, that the \ti{path integral} over 
-$\cC_{[0,T]_{y_0}^{y_1}}$ (defined by discretization as we 
-have done above) is computing the heat flow for time $T$.
 
 In the stochastic-process community this would be rephrased
 as the statement that, in the case $V = 0$, 
@@ -2794,29 +2796,78 @@ kernel. Note that although $\de \mu_N \e^{-S}$
 has a well defined
 limit, the measure $\de \mu_N$ by itself does not.
 
-Here is a formal computation which gives some
+If we take $X = S^1$ then we can make a similar 
+discretization: the only difference is that we require
+$y_0$ and $y_N$ to be equal and then we integrate over their
+common value. Thus for the partition function we get
+\begin{equation}
+Z_{S^1} = \int \dvol_Y k_t(y,y)
+\end{equation}
+This integral has another interpretation: it is the trace
+of the integral operator $U_t$ acting on $L^2$ functions.
+Stated formally,
+\begin{prop}[Lattice approximations to $1$-dimensional sigma
+model on $S^1$ converge to the trace of the heat flow]
+If $X = S^1(T)$, then the discretized path integrals converge,
+\begin{equation}
+  Z_{S^1(T)} = \lim_{N \to \infty} Z_N,
+\end{equation}
+and then
+\begin{equation}
+  Z_{S^1(T)} = \Tr_{L^2(Y)} \e^{-T H}.
+\end{equation}
+\end{prop}
+
+
+\subsection{A sketchy proof}
+
+Here is a rough computation which gives some
 motivation for \autoref{prop:sigma-heat}.
+(See \cite{Baer2007} for an actual proof along these lines.)
 We consider the special case $V = 0$.
 First, the property $U_T = U_{\Delta t}^N$ gives a 
 relation between the integral kernels,
-\begin{equation}
+\begin{equation} \label{eq:kernel-chopup}
   k_T(y_N, y_0) = \int_{Y^{N-1}} \prod_{n=1}^{N-1} \dvol_{y_n} \prod_{n=0}^{N-1} k_{\Delta t} (y_{n+1}, y_n).
 \end{equation}
+
 Next we use the short time asymptotics of
-the heat kernel, as given e.g. in \fixme{Roe}:
+the heat kernel. As $\Delta t \to 0$, there is a sort of complicated
+expansion described in \cite{Berline2004}. Fortunately we need only the leading behavior
+of $k_t(x,y)$ as $\Delta t \to 0$ and $x \to y$,
+plus the first-order correction in $\Delta t$, plus the first-order correction
+in $d(x,y)$; all the higher-order terms will not contribute 
+in \eqref{eq:kernel-chopup} after we take the large $N$ limit.
+
+The leading behavior as $\Delta t \to 0$ and $x \to y$ 
+is not hard to guess: it is the same as on $\R^n$, namely
+\begin{equation}
+  k_{\Delta t}(x,y) \sim \left( \frac{1}{4 \pi \Delta t} \right)^{\frac{\dim Y}{2}} \exp \left( - \frac{1}{4 \Delta t} d(x,y)^2 \right).
+\end{equation}
+The first-order correction in $d(x,y)$ can be extracted from \cite{Berline2004}: it is of the form
+\begin{equation}
+  k_{\Delta t}(x,y) \sim \left( \frac{1}{4 \pi \Delta t} \right)^{\frac{\dim Y}{2}} \exp \left( - \frac{1}{4 \Delta t} d(x,y)^2 \right) \left( 1 + \frac{1}{12} \Ric_x(x-y,x-y) + \cdots \right).
+\end{equation}
+To get the first-order correction in $\Delta t$ we can restrict to the diagonal,
+and then look in \cite{Roe1988a} which says that 
 as $\Delta t \to 0$ we have
 \begin{equation}
-  k_{\Delta t}(x,y) \sim \left( \frac{1}{4 \pi \Delta t} \right)^{\frac{\dim Y}{2}} \exp \left( - \frac{1}{4 \Delta t} d(x,y)^2 \right) \left( 1 + \frac{R(x)}{6} \Delta t + \cdots \right)
+  k_{\Delta t}(x,x) \sim \left( \frac{1}{4 \pi \Delta t} \right)^{\frac{\dim Y}{2}} \exp \left( - \frac{1}{4 \Delta t} d(x,x)^2 \right) \left( 1 + \frac16 R(x) \Delta t + \cdots \right)
 \end{equation}
-Substituting this above we get, in the limit $N \to \infty$,
-\begin{align}
-  k_T(y_N, y_0) &\sim \int_{Y^{N-1}} \prod_{n=1}^{N-1} \dvol_{y_n} \prod_{n=0}^{N-1}\left( \frac{1}{4 \pi \Delta t} \right)^{\frac{\dim Y}{2}} \exp \left( - \frac{1}{4 \Delta t} d(y_{n+1},y_n)^2 + \frac{R(y_n)}{6} \Delta t + \cdots \right) \\
-  &\sim  \int_{Y^{N-1}} \de \mu_N \exp \left( - \frac{\Delta t}{4} \left(\frac{d(y_{n+1},y_n)}{\Delta t}\right)^2 + \frac{R(y_n)}{6} \Delta t \right).
-\end{align}
-This last expression agrees with
+Substituting these in \eqref{eq:kernel-chopup} we get
+\begin{multline}
+  k_T(y_N, y_0) \sim \int_{Y^{N-1}} \prod_{n=1}^{N-1} \dvol_{y_n} \prod_{n=0}^{N-1}\left( \frac{1}{4 \pi \Delta t} \right)^{\frac{\dim Y}{2}} \times \\ 
+  \exp \left( - \frac{1}{4 \Delta t} d(y_{n+1},y_n)^2 \right) \left(1 + \frac16 R(y_n) \Delta t + \frac{1}{12} \Ric_{y_n}(y_{n+1}-y_n,y_{n+1}-y_n) + \cdots \right)
+\end{multline}
+The last term is a bit tricky to deal with, but under the integral it can be replaced
+by $\frac16 R(y_n) \Delta t$. \fixme{explain how} 
+Thus altogether we get
+\begin{equation}
+ k_T(y_N, y_0)  \sim  \int_{Y^{N-1}} \de \mu_N \exp \left[ \Delta t \left( - \qtr \left(\frac{d(y_{n+1},y_n)}{\Delta t}\right)^2 + \frac{R(y_n)}{3} \right) + \cdots \right].
+\end{equation}
+Finally, this last expression agrees with
 the restriction of $S$ to polygonal paths, up to terms which
-vanish in the limit $\Delta t \to 0$
-\fixme{up to factors of $2$ which need to be fixed}
+vanish in the limit $\Delta t \to 0$.
 
 When $V \neq 0$ we can make a similar formal argument to motivate
 \autoref{prop:sigma-heat}.
@@ -2847,27 +2898,10 @@ to the case $V \neq 0$.
 % \end{equation}
 % \end{prop}
 
-If we take $X = S^1$ then we can make a similar 
-discretization: the only difference is that we require
-$y_0$ and $y_N$ to be equal and then we integrate over their
-common value. Thus for the partition function we get
-\begin{equation}
-Z_{S^1} = \int \dvol_Y k_t(y,y)
-\end{equation}
-This integral has another interpretation: it is the trace
-of the integral operator $U_t$ acting on $L^2$ functions.
-Stated formally,
-\begin{prop}[Lattice approximations to $1$-dimensional sigma
-model on $S^1$ converge to the trace of the heat flow]
-If $X = S^1$, then
-\begin{equation}
-  \lim_{N \to \infty} Z_N = \Tr_{L^2(Y)} \e^{-t H}.
-\end{equation}
-\end{prop}
 
 \subsection{Local observables}
 
-Finally there is a similar interpretation for the path
+There is a similar interpretation for the path
 integral with a ``local observable'' inserted. By this
 we mean an observable $\cO: \cC_X \to \R$ whose value 
 only depends on some finite-order jet of $\phi \in \cC_X$
@@ -2894,9 +2928,9 @@ The result is \fixme{ref?}
   $\IP{\cO_F(t)}_{[0,1]^{y_1}_{y_0}}$ is the integral kernel
   representing the operator 
   \begin{equation}
-    \e^{-H(T-t)} F \e^{-Ht}
+    \e^{-H(T-t)} \hat F \e^{-Ht}
   \end{equation}
-  on $L^2(Y)$, where $F$ means the operator of multiplication
+  on $L^2(Y)$, where $\hat F$ means the operator of multiplication
   by $F$.
 \end{prop}
 One pictures this as an instruction: 
@@ -2913,6 +2947,137 @@ Give a heuristic proof of \autoref{prop:1d-discretization-with-insertion} along 
 what we did above for \autoref{prop:sigma-heat}.
 \end{exercise}
 
+\autoref{prop:1d-discretization-with-insertion} 
+says that the path integral converts the
+observable $\cO_F$ associated to the function $F: Y \to \R$ 
+into an operator $\hat F$ on $L^2(Y)$, albeit
+a rather obvious one. This process is sometimes called
+\ti{path-integral quantization} of the function $F$.
+
+We could also consider observables depending on, say, 
+the $1$-jet of $\phi$ instead of the $0$-jet. This would 
+amount to considering a function $F: TY \to \R$, defining
+\begin{equation}
+  (\cO_F(t)) (\phi) = F(\phi'(t)),
+\end{equation}
+and constructing $\IP{\cO_F(t)}$
+again by discretization.
+Then it is an interesting question to identify 
+the corresponding operator on $L^2(Y)$.
+At least when $Y = \R$ we can answer this question:
+\begin{prop} \label{prop:quantization-p}
+When $Y = \R$, use the standard 
+metric to identify $TY = T\R$ with $T^* Y = T^* \R$
+coordinatized by $(x,p)$. Then the function $F = p$
+induces (in the above sense) the operator
+\begin{equation}
+   \hat p = 2 \partial_x
+\end{equation} 
+on $L^2(\R)$. \fixme{check sign} \fixme{change conventions
+somehow so that this $2$ goes away}
+\end{prop}
+
+\begin{exercise} Give a heuristic proof
+of \autoref{prop:quantization-p}.
+\end{exercise}
+
+
+\subsection{Noncommutativity and discretization}
+
+Thus the path-integral quantization converts the
+functions
+$p$, $q$ on $T^* \R$ to operators $\hat{p}$, $\hat{q}$
+on $L^2(\R)$. Of course $\hat{p}$ and $\hat{q}$ do
+not commute with one another, which might at first seem
+puzzling: where does the noncommutativity come from?
+Consider the decorated intervals below:
+\insfig{qft-geometry-19}{0.95}
+Naively we would have (where $\leftrightarrow$ means
+``is the heat kernel for,'' and $T = t_1 + t_2 + t_3$) \fixme{switch to a better notation}
+\begin{equation}
+  \e^{-t_3 H} \hat{p} \e^{-t_2 H} \hat{x} \e^{-t_1 H} \leftrightarrow \int_{\cC_{[0,T]_{y_0}^{y_1}}} \de \phi \, \phi'(t_1 + t_2) \phi(t_1) \e^{-S(\phi)}
+\end{equation}
+\begin{equation}
+  \e^{-t_3 H} \hat{x} \e^{-t_2 H} \hat{p} \e^{-t_1 H} \leftrightarrow \int_{\cC_{[0,T]_{y_0}^{y_1}}} \de \phi \, \phi(t_1 + t_2) \phi'(t_1) \e^{-S(\phi)}
+\end{equation}
+In the limit $t_2 \to 0$ these two path integrals 
+both formally limit to the same object,
+\begin{equation}
+\int_{\cC_{[0,T]_{y_0}^{y_1}}} \de \phi \, \phi(t_1) \phi'(t_1) \e^{-S(\phi)}
+\end{equation}
+but we want to say that actually the two limits are not quite the same: one is
+$ \e^{-t_3 H} \hat{p} \hat{x} \e^{-t_1 H}$
+and the other is
+$ \e^{-t_3 H} \hat{x} \hat{p} \e^{-t_1 H}$. 
+How can this be?
+
+To understand this issue let us think a bit more carefully
+about how we defined the path integral by discretization.
+When we discretize the interval $[0,T]$ we will put one
+of the discretization points at $t_1$, in order to have
+a clean definition of the operator $\phi(t_1)$.
+% But then we have to choose from among various 
+% possible discretizations of $\dot\phi(t_1)$: in particular
+% we might take 
+% \begin{equation}
+%   (\phi(t_1 + \Delta t) - \phi(t_1)) / \Delta t
+% \end{equation}
+% or
+% \begin{equation}
+% (\phi(t_1) - \phi(t_1 - \Delta t)) / \Delta t.
+%  \end{equation} 
+% In the absence of the additional insertion $\phi(t)$,
+% these two insertions behave the same in the 
+% $\Delta t \to 0$ limit. But with $\phi(t_1)$ inserted
+% the story is different. 
+But what do we do about $\phi'(t_1)$?
+Let us set
+\begin{equation}
+  y_1 = \phi(t_1 - \Delta t), \qquad y_2 = \phi(t_1), \qquad y_3 = \phi(t_1 + \Delta t).
+\end{equation}
+Then we might reasonably choose either 
+\begin{equation}
+  \phi'(t_1) = (y_2 - y_1) / \Delta t, \qquad \phi'(t_1) = (y_3 - y_2) / \Delta t.
+\end{equation}
+Then in the discretized path integrals with these two 
+insertions the $y_2$-dependent part is respectively
+\begin{equation}
+  \frac{1}{\Delta t} \int \de y_2 \, (y_2 - y_1) y_2 \, \e^{-F(y)}, \qquad
+  \frac{1}{\Delta t} \int \de y_2 \, (y_3 - y_2) y_2 \, \e^{-F(y)}
+\end{equation}
+where
+\begin{equation}
+  F(y) = [(y_1 - y_2)^2 + (y_3 - y_2)^2] / (4 \Delta t).
+\end{equation}
+These two integrals are not quite the same:
+by integration by parts one shows that they differ by
+\begin{equation}
+  2 \int \de y_1 \de y_2 \de y_3 \, \e^{-F(y)}.
+\end{equation}
+Note this difference survives in the limit 
+$\Delta t \to 0$!
+
+But the latter is just what we get from an insertion
+of the operator $1$ in the path integral.
+So it is what we expected from the commutation relation
+\begin{equation}
+  [\hat p, \hat q] = 2.
+\end{equation}
+
+
+
+\subsection{Symmetries}
+
+\fixme{time translations}
+
+\fixme{isometries of $Y$}
+
+\fixme{the conserved charge}
+
+\fixme{coupling to ``background field'': connection on the
+circle}
+
+
 \subsection{The simple harmonic oscillator}
 
 A fundamental example is the case
@@ -2924,15 +3089,26 @@ Then we have
   H = -\half \partial_x^2 + \half x^2 \omega^2
 \end{equation}
 acting on $\cH = L^2(\R)$.
-There is a nice explicit basis of eigenfunctions \fixme{...}
-with eigenvalues
+There is a nice explicit basis of eigenfunctions,
+\begin{align}
+  \psi_0 &= \e^{- \omega x^2/2}, \\
+  \psi_1 &= x \e^{- \omega x^2/2}, \\
+  \psi_2 &= \left (x^2 - \frac{1}{2 \omega} \right) \e^{- \omega x^2/2}, \\
+  \psi_n &= H_n(x) \e^{- \omega x^2/2}
+\end{align}
+where $H_n(x)$ is the $n$-th Hermite polynomial.
+They obey
 \begin{equation}
-  H \psi_n = \left(\half + n\right) \omega.
+  H \psi_n = \left(\half + n\right) \omega \psi_n.
 \end{equation}
-Thus we compute
+Thus the partition function on $X = S^1(T)$ is
 \begin{equation}
   Z_{S^1(T)} = \Tr \e^{-T H} = \sum_{n=0}^\infty \e^{- \omega T(n + \half)} = \frac{1}{2 \sinh(\omega T/2)}.
 \end{equation}
+
+\fixme{...}
+
+\fixme{also do $Y = S^1$ with no potential, with and without insertion of shift operator}
 
 
 \subsection{Infinite-dimensional determinants}
@@ -2940,9 +3116,21 @@ Thus we compute
 \fixme{explain connection to determinants: no regularization
 needed if we pick the right metric?}
 
+
 \subsection{Effective field theory in quantum mechanics}
 
-\fixme{effective field theory}
+\fixme{effective field theory in a coupled system}
+
+
+\subsection{Supersymmetric quantum mechanics}
+
+
+\fixme{...}
+
+
+\subsection{The index theorem}
+
+\fixme{...}
 
 
 \appendix
