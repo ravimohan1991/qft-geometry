@@ -2200,7 +2200,22 @@ exactly by localization: the reason is that
 functions $f(x)$ are not
 $Q$-invariant.
 
+\begin{defn}[Symplectic form]
+  Consider the the $(M,\omega)$ symplectic manifold with the nondegenerate 2-form $\omega$ as follows
+  \begin{equation}
+    \omega:TM\to T^*M
+  \end{equation}
+with the inverse
+\begin{equation}
+  \Omega:T^*M\to TM
+\end{equation}
+such that $\Omega=\omega^{-1}$.  
+\end{defn}
 
+Now the one-forms on the symplectic manifold can be identified with vector fields.  Consider a differentiable map $H:M\to\R$ known as the Hamiltonian.  The corresponding one-form is $dH$. Therefore we can associate a vector field $X_H$ with the Hamiltonian in the following way 
+\begin{equation}
+  X_H=\Omega(dH,\cdot)
+\end{equation}
 \subsection{Localization in a zero-dimensional sigma model}
 
 Now we consider a less trivial and more geometric example of supersymmetric
