@@ -2321,6 +2321,16 @@ computing in a local coordinate patch. (It might be easiest to use
 local Darboux coordinates for $\omega$.)
 \end{exercise}
 
+\begin{solution}
+  The partition function is essentially
+  \begin{equation}
+  \begin{split}
+    Z&=\int_{\cC=\Pi(TM)}d\vec{x}d\vec{\psi}e^{i\alpha (H+\omega_{ij}\psi^i\psi^j)}\\
+    &=\int_{\cC}d\vec{x}
+  \end{split}
+  \end{equation}
+\end{solution}
+
 Now we want to compute $Z$ by localization.
 Begin by noting that the action $S$ is invariant under the odd vector field
 \begin{equation}
@@ -2350,6 +2360,20 @@ and
 \begin{exercise} Verify \eqref{eq:Qpsi-closed} by direct computation
 using the coordinate expressions of $Q$ and $\Psi$.
 \end{exercise}
+
+\begin{solution}
+  So we have 
+  \begin{equation}
+   Q \Psi = g(Y,Y) + \de(gY) = Y^i Y_i - \psi^i \psi^k \partial_{x^k} Y_i 
+  \end{equation}
+Now $Q^2\Psi = Q(Y^i Y_i - \psi^i \psi^k \partial_{x^k} Y_i)$ and in the coordinates we have
+\begin{equation}
+  \begin{split}
+    Q(Y^i Y_i - \psi^i \psi^k \partial_{x^k} Y_i)&= (\psi^i\partial_{x^i}Y^j\partial_{\psi^j}+Y^i\partial_{x^i})(Y^lY_l-\psi^l\psi^k\partial_{x^k}Y_l)\\
+&= -\psi^i\partial_{x^i}Y^j\psi^k\partial_{x^k}Y_j+\psi^i\partial_{x^i}Y^j\psi^l\partial_{x^j}Y_l+Y^i\partial_{x^i}(Y^lY_l)-Y^i\psi^l\psi^k\partial_{x^i}\partial_{x^k}Y_l
+  \end{split}
+\end{equation}
+\end{solution}
 
 Now we make the deformation $S \to S + \lambda Q \Psi$.
 Because of \eqref{eq:Qpsi-closed}, the deformed action is 
